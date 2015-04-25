@@ -51,7 +51,7 @@ public class LoginControlador extends HttpServlet {
             if(valid){
                 
                 //cambiar
-                url = "/index.html"; 
+                url = "/userMain.jsp"; 
                 invalidUser = "valid";
             }
             else{

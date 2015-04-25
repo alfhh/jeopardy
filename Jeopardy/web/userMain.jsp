@@ -5,6 +5,24 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="professor" scope="session" class="User.Professor"/>
+
+<jsp:useBean id = "datos" scope= "session"
+                     class = "DataBase.DBHandler" />
+<%
+    
+    String valid = (String) session.getAttribute("validLogin");
+    if(valid != null){
+        if(valid.equals("false")){
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
+    else{
+       RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+            dispatcher.forward(request, response); 
+    }
+    %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +60,7 @@
             <li role="presentation"><a href="#">Help</a></li>
           </ul>
         </nav>
-        <h3 class="text-muted">Welcome User</h3>
+        <h3 class="text-muted">Welcome <jsp:getProperty name="professor" property="fname"/> <jsp:getProperty name="professor" property="lname"/></h3>
       </div>
 
       <div class="jumbotron">
