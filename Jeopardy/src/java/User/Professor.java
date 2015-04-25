@@ -10,6 +10,7 @@ package User;
  * @author enriqueohernandez
  */
 public class Professor {
+    private int id;
     private String fname;
     private String lname;
     private String password;
@@ -17,7 +18,8 @@ public class Professor {
     private int status;
     private int tries;
 
-    public Professor(String fname, String lname, String password, String email, int status, int tries) {
+    public Professor(int id, String fname, String lname, String password, String email, int status, int tries) {
+        this.id = id;
         this.fname = fname;
         this.lname = lname;
         this.password = password;
@@ -26,6 +28,7 @@ public class Professor {
         this.tries = tries;
     }
     public Professor(String email, String password) {
+        this.id = 0;
         this.fname = "";
         this.lname = "";
         this.password = password;
@@ -35,12 +38,21 @@ public class Professor {
     }
 
     public Professor() {
+        this.id = 0;
         this.fname = "";
         this.lname = "";
         this.password = "";
         this.email = "";
         this.status = 0;
         this.tries = 0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFname() {

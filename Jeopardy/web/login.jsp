@@ -34,16 +34,35 @@
 
       <form action="LoginControlador?login=true" method ="POST" class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
+         <%
+                //Si regresa un resultado invalido volvemos a la pagina
+        String newPass = (String) request.getAttribute("newPassword");
+        if(newPass != null){
+                %>  <p style="color:green"> Change Successful!, please login with your new password </p>
+                <%
+            
+        }
+    %>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="text" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-                    <%
+                        <%
                 //Si regresa un resultado invalido volvemos a la pagina
-        String invalidUser = (String) request.getAttribute("invalidUser");
+        String numberTries = (String) request.getAttribute("numberTries");
+        if(numberTries != null){
+                %>  <p style="color:green"> Number of tries (3 or more blocked): <%=numberTries%></p>
+                <%
+            
+        }
+    %>
+    
+                        <%
+                //Si regresa un resultado invalido volvemos a la pagina
+        String invalidUser = (String) request.getAttribute("invalidLogin");
         if(invalidUser != null){
             if(invalidUser.equals("invalid")){
-                %>  <p style="color:red">Invalid Password.</p>
+                %>  <p style="color:red">Invalid password or email, please try again.</p>
                 <%
             }
         }
@@ -58,6 +77,7 @@
 
         <button class="btn btn-lg btn-primary btn-block" value="Ldgin" type="submit">Sign in</button>
       </form>
+    
 
     </div> <!-- /container -->
   </body>

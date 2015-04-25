@@ -47,16 +47,42 @@ public class LoginControlador extends HttpServlet {
 
             Professor prof = new Professor(usuario, password);
             valid = DBHandler.getLogin(prof);
+            //System.out.println("# id "+prof.getId());
             
             if(valid){
                 
                 //cambiar
-                url = "/userMain.jsp"; 
-                invalidUser = "valid";
+                if(prof.getStatus() == 2){
+                    url = "/userMain.jsp"; 
+                    invalidUser = "valid";
+                    DBHandler.changeTries(prof, 0);
+                }
+                else if(prof.getStatus() == 1){
+                    url = "/changePass.jsp"; 
+                 
+                }
+                else if(prof.getStatus() == 0){
+                    url = "/BlockedAccount.jsp";
+                }
             }
             else{
-                prof = new Professor();
+                boolean valid2 = false;
+                //prof = new Professor();
                 request.setAttribute("invalidLogin", invalidUser);
+                valid2 = DBHandler.getTries(prof);
+                int tries2  = (1 + prof.getTries());
+                DBHandler.changeTries(prof,(tries2));
+                DBHandler.getTries(prof);
+             
+                request.setAttribute("numberTries",""+prof.getTries());
+                //System.out.println("# id "+prof.getId());
+                if(prof.getTries() >=3 ){
+                    DBHandler.changeStatus(prof, 0);
+                    url = "/BlockedAccount.jsp";
+                }
+                else{
+                url = "/login.jsp";
+                }
             }
             
             session.setAttribute("professor", prof);
@@ -69,6 +95,23 @@ public class LoginControlador extends HttpServlet {
              url = "/login.jsp";
              session.removeAttribute("validLogin");
             
+        }else if(login.equals("changePass")){
+            boolean valid = false;
+            
+            Professor prof = ((Professor)session.getAttribute("professor"));
+            
+             String newPass = request.getParameter("newpass");
+                 
+            valid = DBHandler.changePass(prof, newPass);
+            
+            if(valid){
+                url= "/login.jsp";
+                request.setAttribute("newPassword", "newPassword");
+                DBHandler.changeStatus(prof, 2);
+                DBHandler.changeTries(prof, 0);
+            }
+            else
+                url="/changePass.jsp";
         }
         
         session.setAttribute("validLogin", validLogin);
