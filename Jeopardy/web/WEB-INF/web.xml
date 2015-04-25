@@ -8,6 +8,16 @@
         <servlet-name>LoginControlador</servlet-name>
         <url-pattern>/LoginControlador</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GameController</servlet-name>
+        <servlet-class>Controlador.GameController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GameController</servlet-name>
+        <url-pattern>/GameController</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

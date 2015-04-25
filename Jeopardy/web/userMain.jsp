@@ -55,7 +55,7 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Game +</a></li>
+            <li role="presentation" class="active"><a href="GameController?task=new">Game +</a></li>
             <li role="presentation"><a href="#" >email@test.com</a></li>
             <li role="presentation"><a href="#">Help</a></li>
           </ul>
