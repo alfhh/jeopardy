@@ -25,7 +25,7 @@ public class Professor {
         this.status = status;
         this.tries = tries;
     }
-    public Professor(String email, String passowrd) {
+    public Professor(String email, String password) {
         this.fname = "";
         this.lname = "";
         this.password = password;
