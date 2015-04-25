@@ -6,6 +6,7 @@
 package DataBase;
 
 import User.Professor;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -36,25 +37,29 @@ public class DBHandler {
         boolean valid = false;
         try {
             Statement statement = connection.createStatement();
+           // CallableStatement cs = null;
+            /*
+            
+            ResultSet rs = cs.executeQuery();
+            */
             String email = prof.getEmail();
             String password = prof.getPassword();
-            
-            ResultSet results = statement.executeQuery("CALL returnProfessorRow(" +email + ","+ password+ ")");
+            //"SELECT * FROM Professors where email='"+email+"' AND password='"+password+"'"
+
+            ResultSet results = statement.executeQuery("SELECT * FROM Professors where email='"+email+"' AND password='"+password+"'");
+              //valid = statement.execute("{call returnProfessorRow(" +email + ","+ password+"}");
+            //
             if (results.next()) {
-                prof.setFname(results.getString(1));
-                prof.setPassword(results.getString(2));
-                prof.setStatus(Integer.parseInt(results.getString(4)));
-                prof.setTries(Integer.parseInt(results.getString(5)));
+         
+                prof.setFname(results.getString(2));
+                prof.setLname(results.getString(3));
+                prof.setStatus(Integer.parseInt(results.getString(5)));
+                prof.setTries(Integer.parseInt(results.getString(6)));
+               
                 valid = true;
-               /*
-               private String fname;
-    private String lname;
-    private String password;
-    private String email;
-    private int status;
-    private int tries;
-               */
+ 
             }
+            
             statement.close();
 
         } catch (SQLException ex) {
