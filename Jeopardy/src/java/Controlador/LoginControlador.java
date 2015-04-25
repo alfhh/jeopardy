@@ -6,9 +6,12 @@
 package Controlador;
 
 import DataBase.DBHandler;
+import DataBase.RandomStringGenerator;
 import User.Professor;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -117,6 +120,37 @@ public class LoginControlador extends HttpServlet {
             }
             else
                 url="/changePass.jsp";
+        }
+        else if(login.equals("CreateNewUser")){
+            
+            StringBuffer buffer = new StringBuffer();
+            String characters = "";
+
+                
+            String email =  request.getParameter("email");
+            String name =  request.getParameter("name"); 
+            String last =  request.getParameter("last"); 
+            //http://syntx.io/how-to-generate-a-random-string-in-java/
+           
+            String pass;
+            try {
+                pass = RandomStringGenerator.generateRandomString(10,RandomStringGenerator.Mode.ALPHANUMERIC);
+                DBHandler.insertProfessor( email,  pass,  name,  last);
+                 //Professor prof = new Professor(0,name,last,pass,email,1,0);
+                 session.setAttribute("email1", email );
+                 session.setAttribute("fname1", name );
+                  session.setAttribute("lname1", last );
+                   session.setAttribute("pass1", pass );
+
+                    url="/sendMail.jsp";
+            } catch (Exception ex) {
+                Logger.getLogger(LoginControlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            //int id, String fname, String lname, String password, String email, int status, int tries
+            
+            
+    
         }
         
         session.setAttribute("validLogin", validLogin);

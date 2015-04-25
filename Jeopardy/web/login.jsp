@@ -29,6 +29,7 @@
   </head>
 
   <body>
+  
 
     <div class="container">
 
@@ -78,7 +79,13 @@
         <button class="btn btn-lg btn-primary btn-block" value="Ldgin" type="submit">Sign in</button>
       </form>
     
-
+    <br><br><br><br>
+    <center>
+      <form action="CreateUser.jsp" method ="POST">
+            <button type="submit"   class="btn btn-default">Crear Usuario</button>
+      </form>
+    </center>
+  
     </div> <!-- /container -->
   </body>
 </html>

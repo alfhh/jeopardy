@@ -170,6 +170,20 @@ public class DBHandler {
         }
          return valid;
     }
+     public static boolean insertProfessor (String email, String password, String name, String last) {
+             boolean valid = false;
+        try {
+            Statement statement = connection.createStatement();
+                    
+            String query = "insert into Professors (fname, lname, password, status, tries, email) values ('" + name + "','" + last + "','" + password + "','" + 1 + "','" + 0 + "','" + email + "')";
+            statement.executeUpdate(query);
+            statement.close();
+            valid =true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return valid;
+    }
     /*
     public static void storeMessage(Mensaje mensaje) {
         try {
