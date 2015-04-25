@@ -6,6 +6,7 @@
 package Controlador;
 
 import  DataBase.DBGame;
+import User.Professor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -41,6 +42,8 @@ public class GameController extends HttpServlet {
          * It loads all the courses data, needed to create a new game.
          */
         if(task.equals("new")){
+            System.out.println("Im here..");
+            Professor prof = new Professor("em", "okok");
             DBGame.getCourses();
         }
     }

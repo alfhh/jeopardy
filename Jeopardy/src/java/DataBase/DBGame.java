@@ -32,24 +32,24 @@ public class DBGame {
         }
     }
     
-    public static void getCourses(){
+    public static void getCourses() {
         try {
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery("select name from Classes");
 
             if (results.next()) {
-                System.out.println(results.getString(0));
+                System.out.println(results.getString(1) + "YESH");
             }
             
             statement.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBGame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
     
-    public static boolean getLogin(Professor prof) {
+    public static boolean getLogin2(Professor prof) {
         boolean valid = false;
         try {
             Statement statement = connection.createStatement();
