@@ -22,8 +22,7 @@
     <title>Signin Template for Bootstrap</title>
     <script type = "text/javascript">
              function validar(){
-                 //e.preventDefault;
-                // window.alert("OHsHIT");
+                 //the function validates that the passwords are the same
 
              var password =  document.getElementById('password').value;
              var verPassword = document.getElementById('passwordVer').value;

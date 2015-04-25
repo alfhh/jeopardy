@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author enriqueohernandez
+ * Controller for all login functions
  */
 public class LoginControlador extends HttpServlet {
 
@@ -39,44 +40,43 @@ public class LoginControlador extends HttpServlet {
         String invalidUser = "invalid";
         HttpSession session = request.getSession();
         
+        //if the login came from login page
         if(login.equals("true")){
             String usuario =  request.getParameter("email");
-            String password =  request.getParameter("password");
-            
+            String password =  request.getParameter("password");   
             boolean valid = false;
-
             Professor prof = new Professor(usuario, password);
             valid = DBHandler.getLogin(prof);
-            //System.out.println("# id "+prof.getId());
             
+            //if the user is valid
             if(valid){
-                
-                //cambiar
+                //if the status is completed (passowrd updated)
                 if(prof.getStatus() == 2){
                     url = "/userMain.jsp"; 
                     invalidUser = "valid";
                     DBHandler.changeTries(prof, 0);
                 }
+                //if the user needs to change the password
                 else if(prof.getStatus() == 1){
                     url = "/changePass.jsp"; 
                  
                 }
+                //if the account is bloqued
                 else if(prof.getStatus() == 0){
                     url = "/BlockedAccount.jsp";
                 }
             }
             else{
+                //if the password was wrong increase the number of ties
                 boolean valid2 = false;
-                //prof = new Professor();
                 request.setAttribute("invalidLogin", invalidUser);
                 valid2 = DBHandler.getTries(prof);
                 int tries2  = (1 + prof.getTries());
                 DBHandler.changeTries(prof,(tries2));
-                DBHandler.getTries(prof);
-             
+                DBHandler.getTries(prof);      
                 request.setAttribute("numberTries",""+prof.getTries());
-                //System.out.println("# id "+prof.getId());
                 if(prof.getTries() >=3 ){
+                    //if it is more than 3 we block the account
                     DBHandler.changeStatus(prof, 0);
                     url = "/BlockedAccount.jsp";
                 }
@@ -87,15 +87,20 @@ public class LoginControlador extends HttpServlet {
             
             session.setAttribute("professor", prof);
             validLogin = "true";
-            
-            //request.setAttribute("usuario", usr);
+           
         }
+        /**
+         * if we click logout 
+        */
         else if(login.equals("logout")){
             session.removeAttribute("professor");
              url = "/login.jsp";
              session.removeAttribute("validLogin");
             
-        }else if(login.equals("changePass")){
+        }/**
+         * if it is time to change the password
+         */
+        else if(login.equals("changePass")){
             boolean valid = false;
             
             Professor prof = ((Professor)session.getAttribute("professor"));

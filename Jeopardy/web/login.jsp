@@ -35,7 +35,7 @@
       <form action="LoginControlador?login=true" method ="POST" class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
          <%
-                //Si regresa un resultado invalido volvemos a la pagina
+                //It displays the message if we changed the password successfully 
         String newPass = (String) request.getAttribute("newPassword");
         if(newPass != null){
                 %>  <p style="color:green"> Change Successful!, please login with your new password </p>
@@ -48,7 +48,7 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
                         <%
-                //Si regresa un resultado invalido volvemos a la pagina
+                //It displays the number of tries in case the password was wrong
         String numberTries = (String) request.getAttribute("numberTries");
         if(numberTries != null){
                 %>  <p style="color:green"> Number of tries (3 or more blocked): <%=numberTries%></p>
@@ -58,7 +58,7 @@
     %>
     
                         <%
-                //Si regresa un resultado invalido volvemos a la pagina
+                //If bad input the message gets displayed.
         String invalidUser = (String) request.getAttribute("invalidLogin");
         if(invalidUser != null){
             if(invalidUser.equals("invalid")){

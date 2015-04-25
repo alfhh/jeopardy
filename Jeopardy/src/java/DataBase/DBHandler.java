@@ -33,33 +33,28 @@ public class DBHandler {
             e.printStackTrace();
         }
     }
+    /**
+     * The function saves into Professor the attributes from the Database.
+     * 
+     * @param prof
+     * @return boolean
+     */
     public static boolean getLogin(Professor prof) {
         boolean valid = false;
         String email = prof.getEmail();
         String password = prof.getPassword();
         try {
             Statement statement = connection.createStatement();
-           // CallableStatement cs = null;
-            /*
-            ResultSet rs = cs.executeQuery();
-            */
-            
-            //"SELECT * FROM Professors where email='"+email+"' AND password='"+password+"'"
 
             ResultSet results = statement.executeQuery("SELECT * FROM Professors where email='"+email+"' AND password='"+password+"'");
-              //valid = statement.execute("{call returnProfessorRow(" +email + ","+ password+"}");
-            //
-            //System.out.println("basura");
+
             if (results.next()) {
-                //System.out.println("ID"+Integer.parseInt(results.getString(1)) );
                 prof.setId(Integer.parseInt(results.getString(1)));
                 prof.setFname(results.getString(2));
                 prof.setLname(results.getString(3));
                 prof.setStatus(Integer.parseInt(results.getString(5)));
                 prof.setTries(Integer.parseInt(results.getString(6)));
                 valid = true;
-                
- 
             }
             statement.close();
             
@@ -84,7 +79,12 @@ public class DBHandler {
             }
         }
          return valid;   
-    }
+    }/**
+     * The function changes the password of the Professor
+     * @param prof
+     * @param newPass
+     * @return boolean
+     */
      public static boolean changePass(Professor prof, String newPass) {
              boolean valid = false;
         try {
@@ -101,6 +101,12 @@ public class DBHandler {
          return valid;
 
     }
+     /**
+      * The function changes the status of the professor
+      * @param prof
+      * @param status
+      * @return boolean
+      */
      public static boolean changeStatus (Professor prof, int status) {
              boolean valid = false;
         try {
@@ -115,7 +121,12 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
          return valid;
-    }
+    }/**
+     * The function changes the tries of the Professor
+     * @param prof
+     * @param tries
+     * @return 
+     */
      public static boolean changeTries (Professor prof, int tries) {
              boolean valid = false;
         try {
@@ -131,6 +142,11 @@ public class DBHandler {
         }
          return valid;
     }
+     /**
+      * The function changes the tries of the Professor
+      * @param prof
+      * @return boolean
+      */
      public static boolean getTries (Professor prof) {
              boolean valid = false;
         try {
