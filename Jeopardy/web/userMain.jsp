@@ -9,6 +9,8 @@
 
 <jsp:useBean id = "datos" scope= "session"
                      class = "DataBase.DBHandler" />
+<jsp:useBean id = "datos2" scope= "session"
+                     class = "DataBase.DBGame" />
 <%
     
     String valid = (String) session.getAttribute("validLogin");

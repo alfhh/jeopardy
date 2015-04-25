@@ -20,6 +20,7 @@ import java.util.logging.Logger;
  *
  * @author enriqueohernandez
  */
+//https://github.com/MNoya/CloudDataBase/blob/master/JDBCTutorial/src/com/oracle/tutorial/jdbc/StoredProcedureJavaDBSample.java
 public class DBHandler {
 
     private static Connection connection;

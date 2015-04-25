@@ -8,7 +8,7 @@
 <jsp:useBean id="professor" scope="session" class="User.Professor"/>
 
 <jsp:useBean id = "datos" scope= "session"
-                     class = "DataBase.DBHandler" />
+                     class = "DataBase.DBGame" />
 <%
     // Check if the user is loged in
     String valid = (String) session.getAttribute("validLogin");
