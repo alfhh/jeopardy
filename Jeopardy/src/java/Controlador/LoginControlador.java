@@ -3,20 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DataBase;
+package Controlador;
 
+import DataBase.DBHandler;
+import User.Professor;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author enriqueohernandez
  */
-public class DBHandler extends HttpServlet {
+public class LoginControlador extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,20 +33,49 @@ public class DBHandler extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DBHandler</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DBHandler at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String login = request.getParameter("login");
+        String url = "/login.jsp";
+        String validLogin = "false";
+        String invalidUser = "invalid";
+        HttpSession session = request.getSession();
+        
+        if(login.equals("true")){
+            String usuario =  request.getParameter("email");
+            String password =  request.getParameter("password");
+            
+            boolean valid = false;
+
+            Professor prof = new Professor(usuario, password);
+            valid = DBHandler.getLogin(prof);
+            
+            if(valid){
+                
+                //cambiar
+                url = "/index.html"; 
+                invalidUser = "valid";
+            }
+            else{
+                prof = new Professor();
+                request.setAttribute("invalidLogin", invalidUser);
+            }
+            
+            session.setAttribute("professor", prof);
+            validLogin = "true";
+            
+            //request.setAttribute("usuario", usr);
         }
+        else if(login.equals("logout")){
+            session.removeAttribute("professor");
+             url = "/login.jsp";
+             session.removeAttribute("validLogin");
+            
+        }
+        
+        session.setAttribute("validLogin", validLogin);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+        dispatcher.forward(request, response);  
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
