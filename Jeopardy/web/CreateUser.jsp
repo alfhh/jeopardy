@@ -45,19 +45,19 @@
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="email" placeholder="Email">
+      <input type="text" class="form-control" name="email" placeholder="Email">
     </div>
   </div>
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">First Name</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="name" placeholder="Text input">
+      <input type="text" class="form-control" name="name" placeholder="Text input">
     </div>
   </div>
           <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">Last Name</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="last" placeholder="Text input">
+      <input type="text" class="form-control" name="last" placeholder="Text input">
     </div>
   </div>
   

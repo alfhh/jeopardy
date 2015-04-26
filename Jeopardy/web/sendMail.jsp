@@ -16,33 +16,45 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type = "text/javascript">
         $(document).ready(function() {
-            var email = '<%= session.getAttribute("email1") %>'
-            var name = '<%= session.getAttribute("fname1") %>'
-            var last = '<%= session.getAttribute("lname1") %>'
-            var pass = '<%= session.getAttribute("pass1") %>'
-                   
-            window.alert(email));
+            //window.alert("enviarMAil");
+            var email = '<%= session.getAttribute("email1") %>';
+            var name = '<%= session.getAttribute("fname1") %>';
+            var last = '<%= session.getAttribute("lname1") %>';
+            var pass = '<%= session.getAttribute("pass1") %>';
+            var completeName = name + ' ' +last;
+            var mailBody = 'Hello, ' + completeName + 
+                    '\n\ Your account is ready!, \n\
+                        \n\ Your username is: ' + email + '\n\ and password: ' + pass+'\
+                        \n\ Please login to change your password.';
+            
             $.ajax({
-        type: "POST",
-        url: "https://mandrillapp.com/api/1.0/messages/send.json",
-        data: {
-          'key': 'xwAoTe-1ZDyb2yTDPTks3w',
-          'message': {
-            'from_email': 'newAccount@JeroGen.com',
-            'to': [
-                {
-                  'email': '' + email,
-                  'name': '' + name,
-                  'type': 'to'
-                }
-              ],
-            'autotext': 'true',
-            'subject': 'Your mail subscription!',
-            'html': 'Hello ' + name +', your new passowrd is ' + password +''
+            type: "POST",
+            url: "https://mandrillapp.com/api/1.0/messages/send.json",
+            data: {
+                'key': 'xwAoTe-1ZDyb2yTDPTks3w',
+                'message': {
+                    'from_email': 'mail@JeoCreate.com',
+                    'to': [
+          {
+              'email': email,
+              'name': completeName,
+              'type': 'to'
           }
-        }
-       });
-});
+        ],
+                    'autotext': 'true',
+                    'subject': 'Your new account is ready!',
+                    'html': mailBody
+                }
+            }
+        }).done(function (response) {
+            console.log(response);
+        });
+    
+        });
+                   
+          
+ 
+
        /*
        * private int id;
     private String fname;

@@ -127,9 +127,10 @@ public class LoginControlador extends HttpServlet {
             String characters = "";
 
                 
-            String email =  request.getParameter("email");
+            String email = request.getParameter("email");
             String name =  request.getParameter("name"); 
             String last =  request.getParameter("last"); 
+            System.out.println(email + " "+name + " " +last );
             //http://syntx.io/how-to-generate-a-random-string-in-java/
            
             String pass;
