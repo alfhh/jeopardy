@@ -40,12 +40,12 @@
 
           <h2 class="sub-header">Section title</h2>
           <div class="table-responsive">
-              
+              <form action="GameController?task=questions" method="post">
               <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
                   <th>Name</th>
+                  <th>Select</th>
                 </tr>
               </thead>
               <tbody>
@@ -56,6 +56,7 @@
                         Category cat = (Category)categories.get(i);
                         out.print("<tr>");
                         out.print("<td>"+cat.getName()+"</td>");
+                        out.print("<td><input type='checkbox' name='categories' value='"+cat.getId()+"'><br></td>");
                         out.print("</tr>");
                     }
 
@@ -63,6 +64,8 @@
                 %>
               </tbody>
             </table>
+            <button type="submit" class="btn btn-default">Submit</button>
+           </form>
           </div>
         </div>
       </div>

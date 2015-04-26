@@ -54,12 +54,27 @@ public class GameController extends HttpServlet {
             url = "/newGame.jsp";
         }
         
+        /**
+         * This task receives the id of the Course that was clicked by
+         * the user and then shows all the categories related to the
+         * course.
+         */
         else if(task.equals("check")){
             session.removeAttribute("categories");
             int id = Integer.parseInt(request.getParameter("id"));
             ArrayList categories = DBGame.getCategories(id);
             session.setAttribute("categories", categories);
             url = "/newGame.jsp";
+        }
+        
+        else if(task.equals("questions")){
+            String categoriesID[] = request.getParameterValues("categories");
+            session.setAttribute("cat1", categoriesID[0]);
+            session.setAttribute("cat2", categoriesID[1]);
+            session.setAttribute("cat3", categoriesID[2]);
+            session.setAttribute("cat4", categoriesID[3]);
+            session.setAttribute("cat5", categoriesID[4]);
+            url = "selectSquares.jsp";
         }
         
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
