@@ -5,12 +5,15 @@
  */
 package DataBase;
 
+import Game.Course;
 import User.Professor;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,13 +35,21 @@ public class DBGame {
         }
     }
     
-    public static void getCourses() {
+    /**
+     * Returns the number of elements in the classes tables
+     * Searching by name..
+     * @return size
+     */
+    public static int getNumGames(){
+        // Variable used to store the number of elements in classes
+        int size = 0;
+        
         try {
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("select name from Classes");
+            ResultSet results = statement.executeQuery("select count(name) from Classes");
 
-            if (results.next()) {
-                System.out.println(results.getString(1) + "YESH");
+            if (results.next()) { // Just one row received
+                size = results.getInt(1);
             }
             
             statement.close();
@@ -47,40 +58,35 @@ public class DBGame {
             Logger.getLogger(DBGame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        return size;
     }
     
-    public static boolean getLogin2(Professor prof) {
-        boolean valid = false;
+    /**
+     * Returns a List with the names of all the names of the courses in the
+     * classes table
+     * @return result
+     */
+    public static ArrayList getCourses() {
+        ArrayList result = new ArrayList();
+        
         try {
             Statement statement = connection.createStatement();
-           // CallableStatement cs = null;
-            /*
-            
-            ResultSet rs = cs.executeQuery();
-            */
-            String email = prof.getEmail();
-            String password = prof.getPassword();
-            //"SELECT * FROM Professors where email='"+email+"' AND password='"+password+"'"
+            ResultSet results = statement.executeQuery("select * from Classes");
 
-            ResultSet results = statement.executeQuery("SELECT * FROM Professors where email='"+email+"' AND password='"+password+"'");
-              //valid = statement.execute("{call returnProfessorRow(" +email + ","+ password+"}");
-            //
-            if (results.next()) {
-         
-                prof.setFname(results.getString(2));
-                prof.setLname(results.getString(3));
-                prof.setStatus(Integer.parseInt(results.getString(5)));
-                prof.setTries(Integer.parseInt(results.getString(6)));
-               
-                valid = true;
- 
+            while (results.next()) {
+                int id = Integer.parseInt(results.getString(1));
+                String name = (results.getString(2));
+                Course c = new Course(id, name);
+                result.add(c);
             }
             
             statement.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBGame.class.getName()).log(Level.SEVERE, null, ex);
         }
-         return valid;   
+        
+        return result;
     }
+    
 }

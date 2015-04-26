@@ -9,11 +9,15 @@ import  DataBase.DBGame;
 import User.Professor;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,6 +39,8 @@ public class GameController extends HttpServlet {
             throws ServletException, IOException {
         
         String task = request.getParameter("task");
+        String url = "/login.jsp";
+        HttpSession session = request.getSession();
         
         /**
          * This task is activated when the professor clicks the Game +
@@ -42,10 +48,14 @@ public class GameController extends HttpServlet {
          * It loads all the courses data, needed to create a new game.
          */
         if(task.equals("new")){
-            System.out.println("Im here..");
-            Professor prof = new Professor("em", "okok");
-            DBGame.getCourses();
+            ArrayList courses = DBGame.getCourses(); // Load the courses names
+            int size = DBGame.getNumGames(); // Get the size
+            session.setAttribute("courseNames", courses);
+            url = "/newGame.jsp";
         }
+        
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

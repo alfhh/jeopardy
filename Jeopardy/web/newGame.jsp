@@ -4,10 +4,13 @@
     Author     : ahinojosa
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="Game.Course" %>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="professor" scope="session" class="User.Professor"/>
+<jsp:useBean id= "professor" scope="session" class="User.Professor"/>
 
-<jsp:useBean id = "datos" scope= "session"
+<jsp:useBean id = "newGame" scope= "session"
                      class = "DataBase.DBGame" />
 <%
     // Check if the user is loged in
@@ -58,7 +61,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">JeoGenerator</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -97,28 +100,21 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Topics</h1>
+          <h1 class="page-header">Select a class:</h1>
 
           <div class="row placeholders">
+            <% 
+            ArrayList courses = (ArrayList)session.getAttribute("courseNames");
+                for(int i = 0; i < 3; i++){
+                    Course c = (Course)courses.get(i);
+                    System.out.println("The name is: "+c.getName());
+                    out.println("<div class='col-xs-6 col-sm-3 placeholder'>");
+                    out.println("<img src='http://placehold.it/300&text="+c.getName()+"' class='img-responsive' alt='Generic placeholder thumbnail'>");
+                    out.println("</div>");
+                }
+            %>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              <img src="http://placehold.it/300&text=Add%20New%20!" class="img-responsive" alt="Generic placeholder thumbnail">
             </div>
           </div>
 
