@@ -10,11 +10,17 @@
                      class = "DataBase.DBHandler" />
 
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type = "text/javascript">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type = "text/javascript">
         $(document).ready(function() {
             //window.alert("enviarMAil");
             var email = '<%= session.getAttribute("email1") %>';
@@ -22,10 +28,7 @@
             var last = '<%= session.getAttribute("lname1") %>';
             var pass = '<%= session.getAttribute("pass1") %>';
             var completeName = name + ' ' +last;
-            var mailBody = 'Hello, ' + completeName + 
-                    '\n\ Your account is ready!, \n\
-                        \n\ Your username is: ' + email + '\n\ and password: ' + pass+'\
-                        \n\ Please login to change your password.';
+            var mailBody = 'Hello, ' + completeName + '\r\n Your account is ready!, \r\n Your username is: ' + email + ' and password: ' + pass+' \r\n Please login to change your password.';
             
             $.ajax({
             type: "POST",
@@ -51,23 +54,34 @@
         });
     
         });
-                   
-          
- 
-
-       /*
-       * private int id;
-    private String fname;
-    private String lname;
-    private String password;
-    private String email;
-    private int status;
-    private int tries;
-        */
     </script>
-        <title>Check your email</title>
-    </head>
-    <body>
-        <h1>Check your email</h1>
-    </body>
+
+    <title>Email has been sent</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/sticky-footer.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="page-header">
+        <h1>Account creation successful!</h1>
+      </div>
+      <p class="lead">Thank you <%= session.getAttribute("fname1") %> <%= session.getAttribute("lname1") %></p>
+      <p>A confirmation email has been sent to <%= session.getAttribute("email1") %> with your new password.</p>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Account creation successful!</p>
+      </div>
+    </footer>
+
+  </body>
 </html>

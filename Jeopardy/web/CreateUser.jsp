@@ -19,7 +19,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Sticky Footer Template for Bootstrap</title>
+    <title>Create your account</title>
     
 
     <!-- Bootstrap core CSS -->
@@ -37,7 +37,7 @@
     <!-- Begin page content -->
     <div class="container">
       <div class="page-header">
-        <h1>Sticky footer</h1>
+        <h1>Create your account</h1>
       </div>
       <p class="lead">Please enter your first name, last name and email!</p>
       
@@ -51,13 +51,13 @@
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">First Name</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="name" placeholder="Text input">
+      <input type="text" class="form-control" name="name" placeholder="First Name">
     </div>
   </div>
           <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">Last Name</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="last" placeholder="Text input">
+      <input type="text" class="form-control" name="last" placeholder="Last Name">
     </div>
   </div>
   

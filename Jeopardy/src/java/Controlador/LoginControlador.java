@@ -140,8 +140,8 @@ public class LoginControlador extends HttpServlet {
                  //Professor prof = new Professor(0,name,last,pass,email,1,0);
                  session.setAttribute("email1", email );
                  session.setAttribute("fname1", name );
-                  session.setAttribute("lname1", last );
-                   session.setAttribute("pass1", pass );
+                 session.setAttribute("lname1", last );
+                 session.setAttribute("pass1", pass );
 
                     url="/sendMail.jsp";
             } catch (Exception ex) {

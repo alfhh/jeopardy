@@ -82,7 +82,7 @@
     <br><br><br><br>
     <center>
       <form action="CreateUser.jsp" method ="POST">
-            <button type="submit"   class="btn btn-default">Crear Usuario</button>
+            <button type="submit"   class="btn btn-default">Create User</button>
       </form>
     </center>
   
