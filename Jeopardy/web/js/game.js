@@ -6,5 +6,7 @@
 
 // as soon as the document is loaded
 $( document ).ready(function() {
-  alert("HELLO WORLD!");
+  $('.square').click(function() {
+            alert(this.id);
+        });
 });

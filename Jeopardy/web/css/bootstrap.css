@@ -10,6 +10,14 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+div#main-game{
+    header-align: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: red;
+    color: red;
+}
 body {
   margin: 0;
 }
