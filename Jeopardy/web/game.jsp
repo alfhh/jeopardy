@@ -52,17 +52,16 @@
             Square t3 = new Square(3, "m31", "n31");
             Square t4 = new Square(4, "m41", "n41");
             Square t5 = new Square(5, "m51", "n51");
-            dcol1.add(t1);
-            dcol1.add(t2);
-            dcol1.add(t3);
-            dcol1.add(t4);
-            dcol1.add(t5);
+            dcol2.add(t1);
+            dcol2.add(t2);
+            dcol2.add(t3);
+            dcol2.add(t4);
+            dcol2.add(t5);
             
         %>
-        <table>
+        <div class="container-fluid">
            
-            <tr>
-                <td>
+            <div class="col-md-2">
             <table>
                 <tr><th><%= dcol1H %></th></tr>
                 <% 
@@ -72,13 +71,11 @@
                 <tr><td class="square"><%= s.getHint() %></td></tr>
                 <% } %>
             </table>
-                </td>
+            </div>
 
-                <td>
+            <div class="col-md-2">
             <table>
                 <tr><th><%= dcol2H %></th></tr>
-                                <tr><td>alfa</td></tr>
-
                 <% 
                     for (int i = 0; i < dcol2.size(); i++){
                         Square t = (Square) dcol2.get(i);
@@ -86,9 +83,8 @@
                 <tr><td class="squadre"><%= t.getHint() %></td></tr>
                 <% } %>
             </table>
-                </td>
-            </tr>
+            </div>
 
-        </table>
+        </div>
     </body>
 </html>
