@@ -10,6 +10,12 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/header.jsp" %>
+<script type="text/javascript" src="slick/slick.min.js"></script>
+<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+				
 
     <div class="container-fluid">
       <div class="row">
@@ -33,11 +39,41 @@
                     out.println("</div>");
                 }
             %>
+          
             <div class="col-xs-6 col-sm-3 placeholder">
               <img src="http://placehold.it/300&text=Add%20New%20!" class="img-responsive" alt="Generic placeholder thumbnail">
             </div>
           </div>
+  <script>
+            $(document).ready(function(){
+                $('.row placeholders').slick({
+                centerMode: true,
+                centerPadding: '60px',
+                slidesToShow: 3,
+                responsive: [
+                  {
+                    breakpoint: 768,
+                    settings: {
+                      arrows: false,
+                      centerMode: true,
+                      centerPadding: '40px',
+                      slidesToShow: 3
+                    }
+                  },
+                  {
+                    breakpoint: 480,
+                    settings: {
+                      arrows: false,
+                      centerMode: true,
+                      centerPadding: '40px',
+                      slidesToShow: 1
+                    }
+                  }
+                ]
+              });
+          });    
 
+                </script>
           <h2 class="sub-header">Section title</h2>
           <div class="table-responsive">
               <form action="GameController?task=questions" method="post">
