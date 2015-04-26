@@ -43,7 +43,7 @@ public class HistoryContrlador extends HttpServlet {
             ArrayList lista = DBHandler.getAllHistory(prof);
             
             if(lista.isEmpty()){
-                url="/userMain.jsp";
+                url="/noHistory.jsp";
             }
             else{
                 url="/history.jsp";
