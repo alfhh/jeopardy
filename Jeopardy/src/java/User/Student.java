@@ -17,8 +17,9 @@ public class Student {
     private String teamName;
     private int game;
     private int IdS;
+    private String date;
 
-    public Student(String fname, String lname, int number, int points, String teamName, int game, int IdS) {
+    public Student(String fname, String lname, int number, int points, String teamName, int game, int IdS, String date) {
         this.fname = fname;
         this.lname = lname;
         this.number = number;
@@ -26,6 +27,7 @@ public class Student {
         this.teamName = teamName;
         this.game = game;
         this.IdS = IdS;
+        this.date = date;
     }
 
     public Student() {
@@ -36,6 +38,15 @@ public class Student {
         this.teamName = "";
         this.game = 0;
         this.IdS = 0;
+        this.date = "";
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getFname() {

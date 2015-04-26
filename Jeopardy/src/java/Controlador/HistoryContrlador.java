@@ -7,6 +7,7 @@ package Controlador;
 
 import DataBase.DBHandler;
 import User.Professor;
+import User.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class HistoryContrlador extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String history = request.getParameter("history");
+       // System.out.println("history "+history);
         String url = "/login.jsp";
         HttpSession session = request.getSession();
         if(history.equals("getAllProfessor")){
@@ -48,6 +50,35 @@ public class HistoryContrlador extends HttpServlet {
             else{
                 url="/history.jsp";
                 request.setAttribute("lista", lista);
+            }
+            
+        }
+        if(history.equals("getByStudent")){
+           // System.out.println("controlador");
+            //Professor prof = ((Professor)session.getAttribute("professor"));
+            String outs = (String)request.getAttribute("valor");
+           int number =  (Integer)request.getAttribute("valor");
+         //  System.out.println(outs+" okok");
+           
+            ArrayList lista = DBHandler.getHistoryStudent(number);
+            
+            if(lista.isEmpty()){
+                url="/noHistory.jsp";
+            }
+            else{
+                System.out.println("entro");
+                url="/historyByStudent.jsp";
+                String all = "<table class='table table-hover'><tr><th>First Name</th><th>Last Name</th> <th>Number</th><th>Points</th> <th>Team Name</th></tr>";
+             for (int i = 0; i < lista.size(); i++) {
+                    Student s = (Student) lista.get(i);
+                    all+="<tr><td>"+s.getFname()+"</td><tr><td>"+s.getLname()+"</td><tr><td>"+s.getNumber()+"</td><tr><td>"+s.getPoints()+"</td><tr><td>"+s.getTeamName()+"</td>";
+             }
+             all+="</table>";
+             System.out.println(all);
+                session.setAttribute("lista", all);
+                response.setContentType("text/plain");  
+                response.setCharacterEncoding("UTF-8"); 
+             response.getWriter().write(all); 
             }
             
         }
