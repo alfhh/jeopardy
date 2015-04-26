@@ -6,6 +6,7 @@
 package DataBase;
 
 import Game.Course;
+import Game.Category;
 import User.Professor;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,6 +34,35 @@ public class DBGame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    /**
+     * Returns a List with the names of all the names of the courses in the
+     * classes table
+     * @return result
+     */
+    public static ArrayList getCategories(int idCourse) {
+        ArrayList result = new ArrayList();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("select id, name from Categories where fk_class ="+idCourse+"");
+
+            while (results.next()) {
+                int id = Integer.parseInt(results.getString(1));
+                String name = (results.getString(2));
+                System.out.println("THE NAME IS: "+name);
+                Category d = new Category(id, name, idCourse);
+                result.add(d);
+            }
+            
+            statement.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return result;
     }
     
     /**
