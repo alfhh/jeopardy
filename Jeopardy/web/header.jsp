@@ -37,6 +37,8 @@
 
     <!-- Custom styles for this template -->
     <link href="css/navbar-fixed-top.css" rel="stylesheet">
+    
+    <script src="js/bootstrap.min.js"></script>
 
 
   </head>
