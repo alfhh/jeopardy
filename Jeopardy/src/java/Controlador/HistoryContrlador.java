@@ -5,8 +5,12 @@
  */
 package Controlador;
 
+import DataBase.DBHandler;
+import User.Professor;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +34,25 @@ public class HistoryContrlador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String login = request.getParameter("history");
+        String history = request.getParameter("history");
         String url = "/login.jsp";
         HttpSession session = request.getSession();
+        if(history.equals("getAllProfessor")){
+            Professor prof = ((Professor)session.getAttribute("professor"));
+            
+            ArrayList lista = DBHandler.getAllHistory(prof);
+            
+            if(lista.isEmpty()){
+                url="/userMain.jsp";
+            }
+            else{
+                url="/history.jsp";
+                request.setAttribute("lista", lista);
+            }
+            
+        }
+         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

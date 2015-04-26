@@ -6,6 +6,7 @@
 package DataBase;
 
 import User.Professor;
+import User.Student;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -184,6 +185,40 @@ public class DBHandler {
         }
          return valid;
     }
+     public static ArrayList getAllHistory (Professor prof) {
+             //boolean valid = false;      
+        ArrayList list = new ArrayList();
+        try {            
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(
+       "SELECT s.fname, s.lname, s.number, \n" +
+"t.points, t.name as 'team name', \n" +
+"g.Id as 'game', s.Id\n" +
+"from Students as s\n" +
+"join student_team as st on s.Id = st.fk_student\n" +
+"join Teams as t on t.Id = st.fk_team\n" +
+"join Games as g on t.fk_game = g.Id\n" +
+"where g.fk_prof = "+prof.getId()+"");
+            
+            while (results.next()) {
+                String fname=results.getString(1);
+                String lname=results.getString(2);
+                int number=Integer.parseInt(results.getString(3));
+                int point=Integer.parseInt(results.getString(4));
+                String teamName=results.getString(5);
+                int game=Integer.parseInt(results.getString(6));
+                int Ids=Integer.parseInt(results.getString(7));
+                
+                Student stu = new Student(fname,lname,number,point,teamName,game,Ids);
+                list.add(stu);
+            }
+            statement.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+     }
     /*
     public static void storeMessage(Mensaje mensaje) {
         try {
