@@ -7,6 +7,8 @@
 // as soon as the document is loaded
 $( document ).ready(function() {
   $('.square').click(function() {
-            alert(this.id);
+            // removes the text of the content
+            $(this).toggleClass("show");
+            $(this).removeClass( "square" );
         });
 });

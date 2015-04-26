@@ -4,6 +4,8 @@
     Author     : mrquorr
 --%>
 
+<%@page import="Game.Square"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/header.jsp" %>
 <!DOCTYPE html>
@@ -15,57 +17,78 @@
         <script src="js/game.js"></script>
     </head>
     <body>
-        <div id="main-game">
-            <table class="col-md-12">
-                <tr >
-                    <th class="col-md-2" id="00">00</td>
-                    <th class="col-md-2" id="01">01</td>
-                    <th class="col-md-2" id="02">02</td>
-                    <th class="col-md-2" id="03">03</td>
-                    <th class="col-md-2" id="04">04</td>
-                    <th class="col-md-2" id="05">05</td>
-                </th>
-                <tr>
-                    <td class="col-md-2 square" id="10">10</td>
-                    <td class="col-md-2 square" id="11">11</td>
-                    <td class="col-md-2 square" id="12">12</td>
-                    <td class="col-md-2 square" id="13">13</td>
-                    <td class="col-md-2 square" id="14">14</td>
-                    <td class="col-md-2 square" id="15">15</td>
-                </tr>
-                <tr>
-                    <td class="col-md-2 square" id="20">20</td>
-                    <td class="col-md-2 square" id="21">21</td>
-                    <td class="col-md-2 square" id="22">22</td>
-                    <td class="col-md-2 square" id="23">23</td>
-                    <td class="col-md-2 square" id="24">24</td>
-                    <td class="col-md-2 square" id="25">25</td>
-                </tr>
-                <tr>
-                    <td class="col-md-2 square" id="30">30</td>
-                    <td class="col-md-2 square" id="31">31</td>
-                    <td class="col-md-2 square" id="32">32</td>
-                    <td class="col-md-2 square" id="33">33</td>
-                    <td class="col-md-2 square" id="34">34</td>
-                    <td class="col-md-2 square" id="35">35</td>
-                </tr>
-                <tr>
-                    <td class="col-md-2 square" id="40">40</td>
-                    <td class="col-md-2 square" id="41">41</td>
-                    <td class="col-md-2 square" id="42">42</td>
-                    <td class="col-md-2 square" id="43">43</td>
-                    <td class="col-md-2 square" id="44">44</td>
-                    <td class="col-md-2 square" id="45">45</td>
-                </tr>
-                <tr>
-                    <td class="col-md-2 square" id="50">50</td>
-                    <td class="col-md-2 square" id="51">51</td>
-                    <td class="col-md-2 square" id="52">52</td>
-                    <td class="col-md-2 square" id="53">53</td>
-                    <td class="col-md-2 square" id="54">54</td>
-                    <td class="col-md-2 square" id="55">55</td>
-                </tr>
+        <%
+            //Receive the different columns and their headers. 
+            ArrayList col1 = (ArrayList) request.getAttribute("c1");
+            String col1H = (String) request.getAttribute("c1Header");
+            ArrayList col2 = (ArrayList) request.getAttribute("c2");
+            String col2H = (String) request.getAttribute("c2Header");
+            ArrayList col3 = (ArrayList) request.getAttribute("c3");
+            String col3H = (String) request.getAttribute("c3Header");
+            ArrayList c4l1 = (ArrayList) request.getAttribute("c4");
+            String col4H = (String) request.getAttribute("c4Header");
+            ArrayList co51 = (ArrayList) request.getAttribute("c5");
+            String col5H = (String) request.getAttribute("c5Header");
+            ArrayList col6 = (ArrayList) request.getAttribute("c6");
+            String col6H = (String) request.getAttribute("c6Header");
+            
+            String dcol1H = "foo";
+            ArrayList dcol1= new ArrayList();
+            Square s1 = new Square(1, "m1", "n1");
+            Square s2 = new Square(2, "m2", "n2");
+            Square s3 = new Square(3, "m3", "n3");
+            Square s4 = new Square(4, "m4", "n4");
+            Square s5 = new Square(5, "m5", "n5");
+            dcol1.add(s1);
+            dcol1.add(s2);
+            dcol1.add(s3);
+            dcol1.add(s4);
+            dcol1.add(s5);
+            
+            String dcol2H = "bar";
+            ArrayList dcol2= new ArrayList();
+            Square t1 = new Square(1, "m11", "n11");
+            Square t2 = new Square(2, "m21", "n21");
+            Square t3 = new Square(3, "m31", "n31");
+            Square t4 = new Square(4, "m41", "n41");
+            Square t5 = new Square(5, "m51", "n51");
+            dcol1.add(t1);
+            dcol1.add(t2);
+            dcol1.add(t3);
+            dcol1.add(t4);
+            dcol1.add(t5);
+            
+        %>
+        <table>
+           
+            <tr>
+                <td>
+            <table>
+                <tr><th><%= dcol1H %></th></tr>
+                <% 
+                    for (int i = 0; i < dcol1.size(); i++){
+                        Square s = (Square) dcol1.get(i);
+                %>
+                <tr><td class="square"><%= s.getHint() %></td></tr>
+                <% } %>
             </table>
-        </div>
+                </td>
+
+                <td>
+            <table>
+                <tr><th><%= dcol2H %></th></tr>
+                                <tr><td>alfa</td></tr>
+
+                <% 
+                    for (int i = 0; i < dcol2.size(); i++){
+                        Square t = (Square) dcol2.get(i);
+                %>
+                <tr><td class="squadre"><%= t.getHint() %></td></tr>
+                <% } %>
+            </table>
+                </td>
+            </tr>
+
+        </table>
     </body>
 </html>
