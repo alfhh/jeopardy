@@ -4,11 +4,14 @@
         <servlet-name>LoginControlador</servlet-name>
         <servlet-class>Controlador.LoginControlador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HistoryContrlador</servlet-name>
+        <servlet-class>Controlador.HistoryContrlador</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginControlador</servlet-name>
         <url-pattern>/LoginControlador</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>GameController</servlet-name>
         <servlet-class>Controlador.GameController</servlet-class>
@@ -17,7 +20,10 @@
         <servlet-name>GameController</servlet-name>
         <url-pattern>/GameController</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>HistoryContrlador</servlet-name>
+        <url-pattern>/HistoryContrlador</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

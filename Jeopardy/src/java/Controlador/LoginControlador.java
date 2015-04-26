@@ -95,10 +95,10 @@ public class LoginControlador extends HttpServlet {
         /**
          * if we click logout 
         */
-        else if(login.equals("logout")){
-            session.removeAttribute("professor");
-             url = "/login.jsp";
-             session.removeAttribute("validLogin");
+        else if(login.equals("logout")){            
+                 session.invalidate();
+                response.sendRedirect("login.jsp");
+                return; // <--- Here.
             
         }/**
          * if it is time to change the password
