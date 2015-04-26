@@ -67,14 +67,20 @@ public class GameController extends HttpServlet {
             url = "/newGame.jsp";
         }
         
+        /**
+         * This task receives an array of six values of categories,
+         * from which it uploads them to session.
+         */
         else if(task.equals("questions")){
+            session.removeAttribute("categories");
             String categoriesID[] = request.getParameterValues("categories");
             session.setAttribute("cat1", categoriesID[0]);
             session.setAttribute("cat2", categoriesID[1]);
             session.setAttribute("cat3", categoriesID[2]);
             session.setAttribute("cat4", categoriesID[3]);
             session.setAttribute("cat5", categoriesID[4]);
-            url = "selectSquares.jsp";
+            session.setAttribute("cat6", categoriesID[5]);
+            url = "/selectSquares.jsp";
         }
         
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
