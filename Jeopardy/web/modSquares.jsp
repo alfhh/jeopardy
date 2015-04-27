@@ -94,7 +94,11 @@ function addRowSq(idCategory)
     <div class="container">
     
 
-        <h1>Category</h1>
+        
+        <div class="well well-small">
+            <center> <h1>Questions</h1></center>
+        </div>
+        
        <div id="result1"></div>
     
     </div> <!-- /container -->

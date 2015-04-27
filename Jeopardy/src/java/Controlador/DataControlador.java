@@ -71,7 +71,7 @@ public class DataControlador extends HttpServlet {
             //url="/modCurso.jsp";
            ArrayList list = DBGame.getCourses();
            
-             all += "<table class='table-bordered'><tr><th>Name</th><th>Erase</th></tr>";
+             all += "<table class='table table-bordered'><tr><th>Name</th><th>Erase</th></tr>";
              for (int i = 0; i < list.size(); i++) {
                     Course c = (Course) list.get(i);
                     all+="<tr><td id=name-"+c.getId()+" class='celda' ondblclick=modificar(this,"+c.getId()+",'name')>"+c.getName()+"</td><td id=borrar-"+c.getId()+"><button onclick='borrar("+ c.getId()+")'>Delete Row</button></td></tr>";
@@ -135,7 +135,7 @@ public class DataControlador extends HttpServlet {
                  Course c = (Course) listCourse.get(i);
                  ArrayList listCategory = DBGame.getCategories(c.getId());
                  all+= "<h2>"+c.getName()+"</h2>";
-                 all+= "<table class='table-bordered'><tr><th>Name</th><th>Erase</th></tr>";
+                 all+= "<table class='table table-bordered'><tr><th>Name</th><th>Erase</th></tr>";
                  for(int j =0; j< listCategory.size(); j++){
                      Category cat = (Category) listCategory.get(j);
                      all+="<tr><td id=name-"+cat.getId()+"-"+c.getId()+" class='celda' ondblclick=modificarCat(this,"+c.getId()+","+cat.getId()+",'name')>"+cat.getName()+"</td><td id=borrar-"+cat.getId()+"><button onclick='borrarCat("+c.getId()+","+ cat.getId()+")'>Delete Row</button></td></tr>";
@@ -197,19 +197,22 @@ public class DataControlador extends HttpServlet {
          * retrieves all questions 
          */
         if(data.equals("getSquare")){
-            System.out.println("square!");
+            //System.out.println("square!");
             //url="/modCurso.jsp";
             ArrayList listCourse = DBGame.getCourses();
             String[] column = {"question","hint","points"};
             for(int i =0; i< listCourse.size();i++){
                  Course c = (Course) listCourse.get(i);
                  ArrayList listCategory = DBGame.getCategories(c.getId());
-                 all+= "<h2>"+c.getName()+"</h2>";
+                 //<div class="well well-small">
+            
+       // </div>
+                 all+= "<div class=\"well well-small\"><h2>"+c.getName()+"</h2></div>";
                  for(int j =0; j< listCategory.size(); j++){
                      Category cat = (Category) listCategory.get(j);
                      ArrayList listSquare = DBGame.getSquares(cat.getId());
                      all+="<h3>"+cat.getName()+"</h3>";
-                     all+= "<table class='table-bordered'><tr><th>Question</th><th>Hint</th><th>Points</th><th>Erase</th></tr>";
+                     all+= "<table class='table table-bordered'><tr><th>Question</th><th>Hint</th><th>Points</th><th>Erase</th></tr>";
                      for(int k = 0; k < listSquare.size(); k++){
                          Square sq = (Square) listSquare.get(k);
                             for(int x=0; x<=2;x++){

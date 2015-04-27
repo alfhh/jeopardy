@@ -84,16 +84,11 @@ function addRow()
 </script>
 
     <div class="container">
-                             <%
-                //If bad input the message gets displayed.
-        String message = (String) request.getAttribute("debugCurso");
-        if(message != null){
-            
-                %>  <p style="color:green"><%= message%></p>
-                <%
-        }
-    %>
-        <h1>Lista de usuarios</h1>
+ 
+        
+        <div class="well well-small">
+            <center> <h1>Courses</h1></center>
+        </div>
 
         <div id="result1"></div>
 

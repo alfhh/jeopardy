@@ -11,7 +11,7 @@
         String message = (String) request.getAttribute("message");
         if(message != null){
             
-                %>  <p style="color:green"><%= message%></p>
+            %>  <div class="alert alert-success"><%= message%></div>
                 <%
         }
     %>
