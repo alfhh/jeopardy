@@ -10,18 +10,31 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/header.jsp" %>
+<style>
+    /*Class used for bigger modals*/
+    .btn-xl {
+    padding: 18px 28px;
+    font-size: 32px;
+    border-radius: 8px;
+}
+    
+</style>
 
 <script>
     
+    // Function used to display the answer text inside the modals
     $('button').click(function(){
     $(this).text(function(i,old){
         return old==='+' ?  '-' : '+';
+        });
     });
-});
     
 </script>
-        
+<div class="container">  
+    <div class="jumbotron">
+
 <%
+    // Gets all the values from the session to load it to an Array
     ArrayList columns = new ArrayList();
     columns.add((ArrayList)session.getAttribute("c1"));
     columns.add((ArrayList)session.getAttribute("c2"));
@@ -32,11 +45,12 @@
    
     
 
-  for (int i = 0; i < 5; i++) {
-      for(int j = 0; j < 6; j++){
+  for (int i = 0; i < 5; i++) { // Paint the modals in vertical way
+      for(int j = 0; j < 6; j++){ // Paint the modals in horizontal way
         ArrayList temp = (ArrayList)columns.get(j);
-        Square sq = (Square)temp.get(i);
-        out.println("<button type='button' class='btn btn-primary' data-toggle='modal' data-target='."+sq.getID()+"'>"+sq.getScore()+"</button>");
+        Square sq = (Square)temp.get(i); // Creates a new instance of the Square object, the index of the array depends of the first loop, to start on 0
+        
+        out.println("<button type='button' class='btn btn-primary btn-xl' data-toggle='modal' data-target='."+sq.getID()+"'>"+sq.getScore()+"</button>");
         out.println("<div class='modal fade "+sq.getID()+"' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>");
         out.println("<div class='modal-dialog modal-lg'><div class='modal-content'>");
         
@@ -68,7 +82,8 @@
   }
 %>
 
-
+    </div>
+</div>
           
 
 
