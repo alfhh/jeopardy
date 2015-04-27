@@ -39,6 +39,9 @@ public class HistoryContrlador extends HttpServlet {
        // System.out.println("history "+history);
         String url = "/login.jsp";
         HttpSession session = request.getSession();
+        /**
+         * Retrieves a list of all professor's student games
+         */
         if(history.equals("getAllProfessor")){
             Professor prof = ((Professor)session.getAttribute("professor"));
             
@@ -53,6 +56,9 @@ public class HistoryContrlador extends HttpServlet {
             }
             
         }
+        /**
+         * Retrieves the list of a specific student history
+         */
         if(history.equals("getByStudent")){
            // System.out.println("controlador");
             //Professor prof = ((Professor)session.getAttribute("professor"));

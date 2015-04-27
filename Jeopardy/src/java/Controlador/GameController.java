@@ -62,7 +62,9 @@ public class GameController extends HttpServlet {
         else if(task.equals("check")){
             session.removeAttribute("categories");
             int id = Integer.parseInt(request.getParameter("id"));
+            int num = Integer.parseInt(request.getParameter("num"));
             ArrayList categories = DBGame.getCategories(id);
+            session.setAttribute("idCategories",num);
             session.setAttribute("categories", categories);
             url = "/newGame.jsp";
         }

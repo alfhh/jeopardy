@@ -10,70 +10,76 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/header.jsp" %>
-<script type="text/javascript" src="slick/slick.min.js"></script>
-<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
-  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-				
 
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12 col-md-8 col-md-offset-2 main">
           <h1 class="page-header">Select a class:</h1>
-
-          <div class="row placeholders">
-            <%
+      
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <%
             
             /**
              * Here are printed the first three classes on the top of the
              * page.
-             */
+             */ 
+                int numb = 0;
+                if(session.getAttribute("idCategories")!=null){
+                    numb = (Integer)(session.getAttribute("idCategories"));
+                }
+                
             ArrayList courses = (ArrayList)session.getAttribute("courseNames");
-                for(int i = 0; i < 3; i++){
+                for(int i = 0; i < courses.size(); i++){
                     Course c = (Course)courses.get(i);
-                    out.println("<div class='col-xs-6 col-sm-3 placeholder'>");
-                    out.println("<a href='GameController?task=check&id="+c.getId()+"'>");
-                    out.println("<img src='http://placehold.it/300&text="+c.getName()+"' class='img-responsive' alt='Generic placeholder thumbnail'>");
+                    if(i == numb)
+                        out.println("<li data-target='#myCarousel' data-slide-to='" +i+"' class='active'></li>");
+                    else
+                        out.println("<li data-target='#myCarousel' data-slide-to='" +i+"'></li>");
+                             
+                }
+                /*
+                    
+                */
+            %>
+            </ol>
+
+            <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+              <%
+                ArrayList courses1 = (ArrayList)session.getAttribute("courseNames");
+                for(int i = 0; i < courses1.size(); i++){
+                    Course c = (Course)courses1.get(i);
+                    if(i==numb)
+                        out.println("<div class='item active'>");
+                    else
+                        out.println("<div class='item'>");
+                    out.println("<a href='GameController?task=check&id="+c.getId()+"&num="+i+"'>"); 
+                    out.println("<img class='img-responsive center-block' src='http://placehold.it/300&text="+c.getName()+"' alt=''>");
                     out.println("</a>");
                     out.println("</div>");
                 }
-            %>
-          
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="http://placehold.it/300&text=Add%20New%20!" class="img-responsive" alt="Generic placeholder thumbnail">
-            </div>
+                    
+                    
+                %>
+            
           </div>
-  <script>
-            $(document).ready(function(){
-                $('.row placeholders').slick({
-                centerMode: true,
-                centerPadding: '60px',
-                slidesToShow: 3,
-                responsive: [
-                  {
-                    breakpoint: 768,
-                    settings: {
-                      arrows: false,
-                      centerMode: true,
-                      centerPadding: '40px',
-                      slidesToShow: 3
-                    }
-                  },
-                  {
-                    breakpoint: 480,
-                    settings: {
-                      arrows: false,
-                      centerMode: true,
-                      centerPadding: '40px',
-                      slidesToShow: 1
-                    }
-                  }
-                ]
-              });
-          });    
 
-                </script>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+      
+           <%
+                if(session.getAttribute("categories") != null){
+            %>
           <h2 class="sub-header">Section title</h2>
           <div class="table-responsive">
               <form action="GameController?task=questions" method="post">
@@ -86,7 +92,7 @@
               </thead>
               <tbody>
                 <%
-                if(session.getAttribute("categories") != null){
+                
                     ArrayList categories = (ArrayList)session.getAttribute("categories");
                     for(int i = 0; i < categories.size(); i++){
                         Category cat = (Category)categories.get(i);
@@ -96,13 +102,16 @@
                         out.print("</tr>");
                     }
 
-                }
+                
                 %>
               </tbody>
             </table>
             <button type="submit" class="btn btn-default">Submit</button>
            </form>
           </div>
+          <%
+             }
+            %>  
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@
     Author     : enriqueohernandez
 --%>
 
-
+<!-- /Displays the game history by student id -->
 <%@page import="java.util.StringTokenizer"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

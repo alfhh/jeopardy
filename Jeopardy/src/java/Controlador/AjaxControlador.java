@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class ActionServlet
+ * /used for ajax function
  */
 
 public class AjaxControlador extends HttpServlet {
@@ -29,13 +30,13 @@ public class AjaxControlador extends HttpServlet {
 
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-  String name=null;
-  //System.out.println(request.getAttribute("valor"));
   
-  String number =  (String) request.getParameter("val");
-           System.out.println(number);
-           
-           
+  /**
+   * Retrieves the history of a selected student
+   */
+            String number =  (String) request.getParameter("val");
+            System.out.println(number);
+
             ArrayList lista = DBHandler.getHistoryStudent(Integer.parseInt(number));
             
          
