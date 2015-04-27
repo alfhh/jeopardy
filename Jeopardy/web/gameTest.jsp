@@ -26,8 +26,8 @@
       for(int j = 0; j < 6; j++){
         ArrayList temp = (ArrayList)columns.get(j);
         Square sq = (Square)temp.get(i);
-        out.println("<button type='button' class='btn btn-primary' data-toggle='modal' data-target='.bs-example-modal-lg'>"+sq.getScore()+"</button>");
-        out.println("<div class='modal fade bs-example-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>");
+        out.println("<button type='button' class='btn btn-primary' data-toggle='modal' data-target='."+sq.getID()+"'>"+sq.getScore()+"</button>");
+        out.println("<div class='modal fade "+sq.getID()+"' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>");
         out.println("<div class='modal-dialog modal-lg'><div class='modal-content'>");
 
         //HERE GOES THE CONTENT
