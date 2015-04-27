@@ -65,6 +65,12 @@ public class DBGame {
         return result;
     }
     
+    /**
+     * This function returns an ArrayList with all the questions and answers from
+     * the category.
+     * @param idCategory
+     * @return 
+     */
     public static ArrayList getSquares(int idCategory) {
         ArrayList result = new ArrayList();
         
@@ -75,11 +81,35 @@ public class DBGame {
             while (results.next()) {
                 int id = Integer.parseInt(results.getString(1));
                 String question = (results.getString(2));
-                System.out.println("THE NAME IS: "+question);
                 String hint = (results.getString(3));
                 int points = Integer.parseInt(results.getString(4));
                 Square sq = new Square(id, question, hint, points);
                 result.add(sq);
+            }
+            
+            statement.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return result;
+    }
+    
+    
+    public static ArrayList getSquaresbyID(int idSq, ArrayList column) {
+        ArrayList result = new ArrayList();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("select question, hint, points from Squares where Id ="+idSq+"");
+            while(results.next()){
+                int id = idSq;
+                String question = (results.getString(1));
+                String hint = (results.getString(2));
+                int points = Integer.parseInt(results.getString(3));
+                Square sq = new Square(id, question, hint, points);
+                column.add(sq);
             }
             
             statement.close();

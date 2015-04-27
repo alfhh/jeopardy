@@ -32,7 +32,7 @@
                         out.println("<td>"+sq.getHint()+"</td>");
                         out.println("<td>"+sq.getScore()+"</td>");
                         // THE ID OF THE CATEGORY IS PRINTED FIRST, THEN THE ID OF THE SQUARE
-                        out.println("<td><input type='checkbox' name='categories' value='"+session.getAttribute("catID"+i)+"_"+sq.getID()+"'></td>");
+                        out.println("<td><input type='checkbox' name='"+session.getAttribute("catName"+i)+"' value='"+sq.getID()+"'></td>");
                         out.println("</tr>");
                     }
                     

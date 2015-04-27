@@ -88,6 +88,75 @@ public class GameController extends HttpServlet {
             url = "/selectSquares.jsp";
         }
         
+        else if(task.equals("go")){
+            for(int i = 0; i < 6; i++)
+                session.removeAttribute("squares"+ i);
+            
+                // Creation of C1
+                ArrayList c1 = new ArrayList();
+                String name = session.getAttribute("catName0").toString();
+                String valores[] = request.getParameterValues(name);
+                
+                for(int j = 0; j < 5; j++){
+                    DBGame.getSquaresbyID(Integer.parseInt(valores[j]), c1);
+                }
+                session.setAttribute("c1", c1);
+                
+                // Creation of C2
+                ArrayList c2 = new ArrayList();
+                name = session.getAttribute("catName1").toString();
+                valores = request.getParameterValues(name);
+                
+                for(int j = 0; j < 5; j++){
+                    DBGame.getSquaresbyID(Integer.parseInt(valores[j]), c2);
+                }
+                session.setAttribute("c2", c2);
+                
+                // Creation of C3
+                ArrayList c3 = new ArrayList();
+                name = session.getAttribute("catName2").toString();
+                valores = request.getParameterValues(name);
+                
+                for(int j = 0; j < 5; j++){
+                    DBGame.getSquaresbyID(Integer.parseInt(valores[j]), c3);
+                }
+                session.setAttribute("c3", c3);
+                
+                // Creation of C4
+                ArrayList c4 = new ArrayList();
+                name = session.getAttribute("catName3").toString();
+                valores = request.getParameterValues(name);
+                
+                for(int j = 0; j < 5; j++){
+                    DBGame.getSquaresbyID(Integer.parseInt(valores[j]), c4);
+                }
+                session.setAttribute("c4", c4);
+                
+                // Creation of C5
+                ArrayList c5 = new ArrayList();
+                name = session.getAttribute("catName4").toString();
+                valores = request.getParameterValues(name);
+                
+                for(int j = 0; j < 5; j++){
+                    DBGame.getSquaresbyID(Integer.parseInt(valores[j]), c5);
+                }
+                session.setAttribute("c5", c5);
+                
+                // Creation of C6
+                ArrayList c6 = new ArrayList();
+                name = session.getAttribute("catName5").toString();
+                valores = request.getParameterValues(name);
+                
+                for(int j = 0; j < 5; j++){
+                    DBGame.getSquaresbyID(Integer.parseInt(valores[j]), c6);
+                }
+                session.setAttribute("c6", c6);
+                
+                
+            
+            url = "/gameTest.jsp";
+        }
+        
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
