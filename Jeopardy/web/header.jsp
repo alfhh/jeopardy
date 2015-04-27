@@ -77,6 +77,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Add-Modify-Edit <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="modCurso.jsp">Course</a></li>
+                <li><a href="modCategory.jsp">Category</a></li>
               </ul>
             </li>  
             <li><a href="addStudent.jsp">AddStudent</a></li>

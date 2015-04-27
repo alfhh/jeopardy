@@ -336,6 +336,50 @@ public class DBHandler {
         }
          return valid;
     }
+     public static boolean updateCategory (String id, String column, String oldvalue, String newValue, String idsup) {
+             boolean valid = false;
+        try {
+            Statement statement = connection.createStatement();
+                    //UPDATE registrados SET $nombreColumna= '$valorNuevo' WHERE $nombreColumna = '$valorViejo' AND id = '$id'"
+            String query = "UPDATE Categories SET " +column +" = '"+newValue+"' WHERE " + column+ "= '"+oldvalue+"' AND Id= '"+id+"' AND fk_class ='"+idsup+"'";
+            System.out.println(query);
+            statement.executeUpdate(query);
+            statement.close();
+            valid =true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return valid;
+    }
+     public static boolean deleteCategory (String idClass, String idCategory) {
+             boolean valid = false;
+        try {
+            Statement statement = connection.createStatement();
+                    //UPDATE registrados SET $nombreColumna= '$valorNuevo' WHERE $nombreColumna = '$valorViejo' AND id = '$id'"
+            String query = "DELETE FROM Categories WHERE Id ="+idCategory+" AND fk_class= "+idClass+" LIMIT 1";
+            System.out.println(query);
+            statement.executeUpdate(query);
+            statement.close();
+            valid =true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return valid;
+    }
+     public static boolean addCategory (String idClass) {
+             boolean valid = false;
+        try {
+            Statement statement = connection.createStatement();
+            String query = "INSERT into Categories (name,fk_class) VALUES ('name','"+idClass+"')";
+            System.out.println(query);
+            statement.executeUpdate(query);
+            statement.close();
+            valid =true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return valid;
+    }
      //"INSERT INTO registrados (nombre,apellido,direccion,codigo,ciudad,hijos,email) VALUES('nombre','apellido','direccion','codigo','ciudad','hijos','email')"
     /*
     public static void storeMessage(Mensaje mensaje) {
