@@ -171,6 +171,14 @@ public class DBHandler {
         }
          return valid;
     }
+     /**
+      * Insert a professor
+      * @param email
+      * @param password
+      * @param name
+      * @param last
+      * @return boolean
+      */
      public static boolean insertProfessor (String email, String password, String name, String last) {
              boolean valid = false;
         try {
@@ -185,6 +193,11 @@ public class DBHandler {
         }
          return valid;
     }
+     /**
+      * Get history from specific professor
+      * @param prof
+      * @return 
+      */
      public static ArrayList getAllHistory (Professor prof) {
              //boolean valid = false;      
         ArrayList list = new ArrayList();
@@ -219,6 +232,11 @@ public class DBHandler {
         }
         return list;
      }
+     /**
+      * Get history from specific student
+      * @param numberId
+      * @return 
+      */
      public static ArrayList getHistoryStudent (int numberId) {
              //boolean valid = false;      
         ArrayList list = new ArrayList();
@@ -253,12 +271,34 @@ public class DBHandler {
         }
         return list;
      }
+     /**
+      * Insert new student
+      * @param name
+      * @param last
+      * @param number
+      * @return boolean
+      */
      public static boolean insertStudent (String name, String last, String number) {
              boolean valid = false;
         try {
             Statement statement = connection.createStatement();
                     
             String query = "insert into Students (fname, lname, number) values ('" + name + "','" + last + "','" + number + "')";
+            statement.executeUpdate(query);
+            statement.close();
+            valid =true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return valid;
+    }
+     public static boolean updateCourse (String id, String column, String oldvalue, String newValue) {
+             boolean valid = false;
+        try {
+            Statement statement = connection.createStatement();
+                    //UPDATE registrados SET $nombreColumna= '$valorNuevo' WHERE $nombreColumna = '$valorViejo' AND id = '$id'"
+            String query = "UPDATE Classes SET " +column +" = '"+newValue+"' WHERE " + column+ "= '"+oldvalue+"' AND Id= '"+id+"'";
+            System.out.println(query);
             statement.executeUpdate(query);
             statement.close();
             valid =true;

@@ -70,7 +70,15 @@
                 <li><a href="#">Separated link</a></li>
                 <li><a href="#">One more separated link</a></li>
               </ul>
+              
+                 
             </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Add-Modify-Edit <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="modCurso.jsp">Course</a></li>
+              </ul>
+            </li>  
             <li><a href="addStudent.jsp">AddStudent</a></li>
             
           </ul>
