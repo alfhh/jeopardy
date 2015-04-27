@@ -1,26 +1,28 @@
 <%-- 
-    Document   : modCategory
-    Created on : Apr 27, 2015, 9:20:51 AM
+    Document   : modSquares
+    Created on : Apr 27, 2015, 1:29:51 PM
     Author     : enriqueohernandez
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/header.jsp" %>
-<script src="js/modificacionCat.js"></script>
+<script src="js/modificacionSq.js"></script>
 <script>
    
    
 //Salvando las modificaciones
-function salvarMod(obj,valor,idsup,id1,htmlId, valorviejo)
-{
+function salvarModSq(obj,valor,valorviejo, idClass,idCategory,idQuestion,columna)
+{ //salvarMod(obj, input.value, valorviejo ,idClass,idCategory,idQuestion,columna);
    //salvarMod(obj, input.value,idsup,id1,htmlId, valorviejo);
-    var i1 = "data=updateCategory&id=";
+    var i1 = "data=updateSquare&id=";
     var i2 = "&columna=";
     var i3 = "&valorViejo=";
     var i4 = "&valor=";
     var i5 = "&sup=";
-    var res = i1.concat(id1,i2,htmlId,i3,valorviejo, i4, valor,i5,idsup);
-
+    var res = i1.concat(idQuestion,i2,columna,i3,valorviejo, i4, valor,i5,idCategory);
+ //window.alert(res);
+        
+    
     $.ajax({
                     type: "get",
                     url: "DataControlador", //this is my servlet
@@ -28,30 +30,32 @@ function salvarMod(obj,valor,idsup,id1,htmlId, valorviejo)
                     success: function(msg){ 
                          //window.alert("salvar");
                         obj.replaceChild(document.createTextNode(valor), obj.firstChild);
-
+                        //var panel = document.getElementById("result1");
+                        
+                        //panel.innerHTML= msg;
                     }
                 });
 }
-//carga la pagina de nuevo
+//reloads the page 
 function reload1(){
    // window.alert("reload");
                     $.ajax({
                     type: "get",
                     url: "DataControlador", //this is my servlet
-                    data: "data=getCategory",
+                    data: "data=getSquare",
                     success: function(msg){   
                         var panel = document.getElementById("result1");
                         panel.innerHTML= msg;
                     }
                 });
 }
-//borra una categoria segun el boton
-function borrarCat(idClass, idCategory)
+//erases a question
+function borrarSq(idClass, idCategory, idQuestion)
 {
    
-    var i1 = "data=deleteCategory&idClass=";
-    var i2 = "&idCategory=";
-    var res = i1.concat(idClass,i2,idCategory);
+    var i1 = "data=deleteSquare&idCategory=";
+    var i2 = "&idQuestion=";
+    var res = i1.concat(idCategory,i2,idQuestion);
     //window.alert(res);
     
     $.ajax({
@@ -65,11 +69,11 @@ function borrarCat(idClass, idCategory)
                 reload1();
 
 }
-//agrega una nueva categoria
-function addRowCat(idClass)
+//adds a new row to be modified
+function addRowSq(idCategory)
 {
-     var i1 = "data=addCategory&idClass=";
-    var res = i1.concat(idClass);
+     var i1 = "data=addSquare&idCategory=";
+    var res = i1.concat(idCategory);
    // window.alert(res);
     $.ajax({
                     type: "get",
@@ -107,10 +111,11 @@ function addRowCat(idClass)
                 $.ajax({
                     type: "get",
                     url: "DataControlador", //this is my servlet
-                    data: "data=getCategory",
+                    data: "data=getSquare",
                     success: function(msg){   
                         var panel = document.getElementById("result1");
-                        panel.innerHTML= msg;
+                       // window.alert(msg);
+                        panel.innerHTML= msg; 
                     }
                 });
         });

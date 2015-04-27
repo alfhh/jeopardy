@@ -33,6 +33,7 @@ function salvarMod(obj, valor,id1,htmlId, valorviejo)
                     }
                 });
 }
+//recarga la pagina
 function reload1(){
    // window.alert("reload");
                     $.ajax({
@@ -45,6 +46,7 @@ function reload1(){
                     }
                 });
 }
+//erases an object according to the button
 function borrar(obj)
 {
    
@@ -62,6 +64,7 @@ function borrar(obj)
                 reload1();
 
 }
+//adds a new empty row to be modified
 function addRow()
 {
     

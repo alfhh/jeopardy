@@ -78,6 +78,7 @@
               <ul class="dropdown-menu" role="menu">
                 <li><a href="modCurso.jsp">Course</a></li>
                 <li><a href="modCategory.jsp">Category</a></li>
+                <li><a href="modSquares.jsp">Questions</a></li>
               </ul>
             </li>  
             <li><a href="addStudent.jsp">AddStudent</a></li>

@@ -291,7 +291,14 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
          return valid;
-    }
+    }/**
+     * Updates a course informations
+     * @param id
+     * @param column
+     * @param oldvalue
+     * @param newValue
+     * @return 
+     */
      public static boolean updateCourse (String id, String column, String oldvalue, String newValue) {
              boolean valid = false;
         try {
@@ -307,6 +314,11 @@ public class DBHandler {
         }
          return valid;
     }
+     /**
+      * Deletes a specific course
+      * @param id
+      * @return 
+      */
      public static boolean deleteCourse (String id) {
              boolean valid = false;
         try {
@@ -321,7 +333,10 @@ public class DBHandler {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
          return valid;
-    }
+    }/**
+     * adds a new empty course
+     * @return 
+     */
      public static boolean addCourse () {
              boolean valid = false;
         try {
@@ -336,6 +351,15 @@ public class DBHandler {
         }
          return valid;
     }
+     /**
+      * Updates a specific category according to its id and the Course id
+      * @param id
+      * @param column
+      * @param oldvalue
+      * @param newValue
+      * @param idsup
+      * @return 
+      */
      public static boolean updateCategory (String id, String column, String oldvalue, String newValue, String idsup) {
              boolean valid = false;
         try {
@@ -351,6 +375,12 @@ public class DBHandler {
         }
          return valid;
     }
+     /**
+      * Deletes a specific category according to its id and its class id
+      * @param idClass
+      * @param idCategory
+      * @return 
+      */
      public static boolean deleteCategory (String idClass, String idCategory) {
              boolean valid = false;
         try {
@@ -366,6 +396,11 @@ public class DBHandler {
         }
          return valid;
     }
+     /**
+      * adds a new empty category according to its class id
+      * @param idClass
+      * @return 
+      */
      public static boolean addCategory (String idClass) {
              boolean valid = false;
         try {
@@ -380,60 +415,72 @@ public class DBHandler {
         }
          return valid;
     }
-     //"INSERT INTO registrados (nombre,apellido,direccion,codigo,ciudad,hijos,email) VALUES('nombre','apellido','direccion','codigo','ciudad','hijos','email')"
-    /*
-    public static void storeMessage(Mensaje mensaje) {
-        try {
-            Statement statement = connection.createStatement();
-            String de = mensaje.getDe();
-            String para = mensaje.getPara();
-            String contenido = mensaje.getContenido();
-            String query = "insert into mensajes (de, para, contenido) values ('" + de + "','" + para + "','" + contenido + "')";
-            statement.executeUpdate(query);
-            statement.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DBhandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    public static ArrayList getMessages(String para) {
-        ArrayList list = new ArrayList();
-        try {            
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT de, contenido, contenido FROM mensajes where para='"+para+"'");
-            while (results.next()) {
-                String de=results.getString(1);
-                String contenido=results.getString(2);
-                Mensaje mensaje = new Mensaje(de, para, contenido);
-                list.add(mensaje);
-            }
-            statement.close();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(DBhandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
-    }
-    
-   
-        public static boolean addUser(Usuario usr) {
+     /**
+      * Updates a specific question according to its id, category id and class id
+      * @param id
+      * @param column
+      * @param oldvalue
+      * @param newValue
+      * @param idsup
+      * @return 
+      */
+      public static boolean updateSquare (String id, String column, String oldvalue, String newValue, String idsup) {
              boolean valid = false;
         try {
             Statement statement = connection.createStatement();
-            String usuario = usr.getUser();
-            String password = usr.getPassword();
-            String query = "insert into usuarios (users, passwords) values ('" + usuario + "','" + password + "')";
+                    //UPDATE registrados SET $nombreColumna= '$valorNuevo' WHERE $nombreColumna = '$valorViejo' AND id = '$id'"
+            String query = "UPDATE Squares SET " +column +" = '"+newValue+"' WHERE " + column+ "= '"+oldvalue+"' AND Id= '"+id+"' AND fk_category ='"+idsup+"'";
+            System.out.println(query);
             statement.executeUpdate(query);
             statement.close();
             valid =true;
         } catch (SQLException ex) {
-            Logger.getLogger(DBhandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
          return valid;
-
     }
-    
-   */
+      /**
+       * deletes a specific question according to its id, category id and class id
+       * @param idCategory
+       * @param idQuestion
+       * @return 
+       */
+       public static boolean deleteSquare (String idCategory, String idQuestion){//(String idClass, String idCategory) {
+             boolean valid = false; //idCategory, idQuestion
+        try {
+            Statement statement = connection.createStatement();
+                    //UPDATE registrados SET $nombreColumna= '$valorNuevo' WHERE $nombreColumna = '$valorViejo' AND id = '$id'"
+            String query = "DELETE FROM Squares WHERE Id ="+idQuestion+" AND fk_category= "+idCategory+" LIMIT 1";
+            System.out.println(query);
+            statement.executeUpdate(query);
+            statement.close();
+            valid =true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return valid;
+    }
+       /**
+        * adds a new empty question according to its id, category id and class id
+        * @param idCategory
+        * @return 
+        */
+       public static boolean addSquare (String idCategory) {
+             boolean valid = false;
+        try {
+            Statement statement = connection.createStatement();
+            String query = "INSERT into Squares (question,hint,points,fk_category) VALUES ('question','hint',0,'"+idCategory+"')";
+            System.out.println(query);
+            statement.executeUpdate(query);
+            statement.close();
+            valid =true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return valid;
+    }
+     //updateSquare
+     
+  
 
 }
