@@ -7,6 +7,7 @@ package Controlador;
 
 import DataBase.DBGame;
 import DataBase.DBHandler;
+import Game.Category;
 import Game.Course;
 import User.Professor;
 import User.Student;
@@ -106,6 +107,67 @@ public class DataControlador extends HttpServlet {
            //String id = request.getParameter("id");
            //String id, String column, String oldvalue, String newValue
            DBHandler.addCourse();
+           
+        }
+        if(data.equals("getCategory")){
+            
+            //url="/modCurso.jsp";
+            ArrayList listCourse = DBGame.getCourses();
+            ArrayList[] listCategory = new ArrayList[listCourse.size()];
+            
+            for(int i =0; i< listCourse.size();i++){
+                 Course c = (Course) listCourse.get(i);
+                 listCategory[i] = DBGame.getCategories(c.getId());
+                 all+= "<h2>"+c.getName()+"</h2>";
+                 all+= "<table class='table-bordered'><tr><th>Name</th><th>borrar</th></tr>";
+                 for(int j =0; j< listCategory[i].size(); j++){
+                     Category cat = (Category) listCategory[i].get(j);
+                     all+="<tr><td id=name-"+cat.getId()+"-"+c.getId()+" class='celda' ondblclick=modificarCat(this,"+c.getId()+","+cat.getId()+",'name')>"+cat.getName()+"</td><td id=borrar-"+cat.getId()+"><button onclick='borrarCat("+c.getId()+","+ cat.getId()+")'>BorrarFila</button></td></tr>";
+
+                 }
+                 all+="</table>";
+                 all+="<button onclick=\"addRowCat("+c.getId()+")\">Add Row</button>";
+            }
+            
+           
+        }
+            
+            
+        if(data.equals("updateCategory")){
+            //data=updateCategory&id=6&columna=name&valorViejo=Calculus&valor=Calculus1&sup=1
+            System.out.println("HACERUPDATE");
+            
+           String id = request.getParameter("id");
+           String columna = request.getParameter("columna");
+           String valorViejo = request.getParameter("valorViejo");
+           String newValor = request.getParameter("valor");
+           String idsup = request.getParameter("sup");
+           //String id, String column, String oldvalue, String newValue
+           DBHandler.updateCategory(id, columna, valorViejo, newValor, idsup);    
+  
+        }
+        if(data.equals("deleteCategory")){
+            
+            System.out.println("delete");
+            /*
+             var i1 = "data=deleteCategory&idClass=";
+    var i2 = "&idCategory="
+            */
+            
+           String idClass = request.getParameter("idClass");
+           String idCategory = request.getParameter("idCategory");
+           //String id, String column, String oldvalue, String newValue
+           DBHandler.deleteCategory(idClass, idCategory);
+           
+        }
+        //deleteCategory
+        if(data.equals("addCategory")){
+            
+           // System.out.println("add");
+            
+           String idClass = request.getParameter("idClass");
+           //String id, String column, String oldvalue, String newValue
+           DBHandler.addCategory(idClass);
            
         }
         
