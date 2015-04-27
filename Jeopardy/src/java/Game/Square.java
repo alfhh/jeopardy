@@ -13,11 +13,13 @@ public class Square {
     private int score;
     private String question;
     private String hint;
-
-    public Square(int i, String m, String n){
-        this.score = i;
+    private int id;
+    
+    public Square(int i, String m, String n, int p){
+        this.id = i;
         this.question = m;
         this.hint = n;
+        this.score = p;
     }
 
     public int getScore() {
@@ -43,6 +45,16 @@ public class Square {
     public void setHint(String hint) {
         this.hint = hint;
     }
+
+    public int getID() {
+        return id;
+    }
+
+    public void setID(int id) {
+        this.id = id;
+    }
+    
+    
     
     
 }

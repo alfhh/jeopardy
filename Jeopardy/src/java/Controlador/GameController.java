@@ -74,12 +74,15 @@ public class GameController extends HttpServlet {
         else if(task.equals("questions")){
             session.removeAttribute("categories");
             String categoriesID[] = request.getParameterValues("categories");
-            session.setAttribute("cat1", categoriesID[0]);
-            session.setAttribute("cat2", categoriesID[1]);
-            session.setAttribute("cat3", categoriesID[2]);
-            session.setAttribute("cat4", categoriesID[3]);
-            session.setAttribute("cat5", categoriesID[4]);
-            session.setAttribute("cat6", categoriesID[5]);
+            
+            for(int i = 0; i < 6; i++) {
+                String[] cat = categoriesID[i].split("_");
+                session.setAttribute("catID"+ i, cat[0]);
+                session.setAttribute("catName"+ i, cat[1]);
+                ArrayList squares = DBGame.getSquares(Integer.parseInt(cat[0]));
+                session.setAttribute("squares"+ i, squares);
+            }
+            
             url = "/selectSquares.jsp";
         }
         

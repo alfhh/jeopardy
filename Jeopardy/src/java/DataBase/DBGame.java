@@ -7,6 +7,7 @@ package DataBase;
 
 import Game.Course;
 import Game.Category;
+import Game.Square;
 import User.Professor;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -51,7 +52,6 @@ public class DBGame {
             while (results.next()) {
                 int id = Integer.parseInt(results.getString(1));
                 String name = (results.getString(2));
-                System.out.println("THE NAME IS: "+name);
                 Category d = new Category(id, name, idCourse);
                 result.add(d);
             }
@@ -64,6 +64,33 @@ public class DBGame {
         
         return result;
     }
+    
+    public static ArrayList getSquares(int idCategory) {
+        ArrayList result = new ArrayList();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("select Id, question, hint, points from Squares where fk_category ="+idCategory+"");
+
+            while (results.next()) {
+                int id = Integer.parseInt(results.getString(1));
+                String question = (results.getString(2));
+                System.out.println("THE NAME IS: "+question);
+                String hint = (results.getString(3));
+                int points = Integer.parseInt(results.getString(4));
+                Square sq = new Square(id, question, hint, points);
+                result.add(sq);
+            }
+            
+            statement.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return result;
+    }
+    
     
     /**
      * Returns the number of elements in the classes tables

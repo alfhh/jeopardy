@@ -92,7 +92,7 @@
                         Category cat = (Category)categories.get(i);
                         out.print("<tr>");
                         out.print("<td>"+cat.getName()+"</td>");
-                        out.print("<td><input type='checkbox' name='categories' value='"+cat.getId()+"'><br></td>");
+                        out.print("<td><input type='checkbox' name='categories' value='"+cat.getId()+ "_"+ cat.getName() +"'><br></td>");
                         out.print("</tr>");
                     }
 
