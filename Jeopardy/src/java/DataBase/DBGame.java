@@ -97,6 +97,14 @@ public class DBGame {
     }
     
     
+    /**
+     * This function use the id of an Square to find it on the database
+     * then it gets all the data from it and creates a Square object with that
+     * information. Finally this object is added to the column array.
+     * @param idSq
+     * @param column
+     * @return 
+     */
     public static ArrayList getSquaresbyID(int idSq, ArrayList column) {
         ArrayList result = new ArrayList();
         

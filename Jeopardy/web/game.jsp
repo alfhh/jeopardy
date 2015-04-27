@@ -34,11 +34,11 @@
             
             String dcol1H = "foo";
             ArrayList dcol1= new ArrayList();
-            Square s1 = new Square(1, "m1", "n1");
-            Square s2 = new Square(2, "m2", "n2");
-            Square s3 = new Square(3, "m3", "n3");
-            Square s4 = new Square(4, "m4", "n4");
-            Square s5 = new Square(5, "m5", "n5");
+            Square s1 = new Square(1, "m1", "n1", 1);
+            Square s2 = new Square(2, "m2", "n2", 1);
+            Square s3 = new Square(3, "m3", "n3", 1);
+            Square s4 = new Square(4, "m4", "n4", 1);
+            Square s5 = new Square(5, "m5", "n5", 1);
             dcol1.add(s1);
             dcol1.add(s2);
             dcol1.add(s3);
@@ -47,11 +47,11 @@
             
             String dcol2H = "bar";
             ArrayList dcol2= new ArrayList();
-            Square t1 = new Square(1, "m11", "n11");
-            Square t2 = new Square(2, "m21", "n21");
-            Square t3 = new Square(3, "m31", "n31");
-            Square t4 = new Square(4, "m41", "n41");
-            Square t5 = new Square(5, "m51", "n51");
+            Square t1 = new Square(1, "m11", "n11", 1);
+            Square t2 = new Square(2, "m21", "n21", 1);
+            Square t3 = new Square(3, "m31", "n31", 1);
+            Square t4 = new Square(4, "m41", "n41", 1);
+            Square t5 = new Square(5, "m51", "n51",1 );
             dcol2.add(t1);
             dcol2.add(t2);
             dcol2.add(t3);

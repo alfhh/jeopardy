@@ -12,32 +12,32 @@
 <%@include file="/header.jsp" %>
         
 <%
-    ArrayList col2 = (ArrayList)session.getAttribute("c2");
-    for(int i = 0; i < 5; i++){
-        Square c = (Square)col2.get(i);
-        out.println(c.getQuestion());
-    }
+    ArrayList columns = new ArrayList();
+    columns.add((ArrayList)session.getAttribute("c1"));
+    columns.add((ArrayList)session.getAttribute("c2"));
+    columns.add((ArrayList)session.getAttribute("c3"));
+    columns.add((ArrayList)session.getAttribute("c4"));
+    columns.add((ArrayList)session.getAttribute("c5"));
+    columns.add((ArrayList)session.getAttribute("c6"));
+   
     
+
+  for (int i = 0; i < 5; i++) {
+      for(int j = 0; j < 6; j++){
+        ArrayList temp = (ArrayList)columns.get(j);
+        Square sq = (Square)temp.get(i);
+        out.println("<button type='button' class='btn btn-primary' data-toggle='modal' data-target='.bs-example-modal-lg'>"+sq.getScore()+"</button>");
+        out.println("<div class='modal fade bs-example-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>");
+        out.println("<div class='modal-dialog modal-lg'><div class='modal-content'>");
+
+        //HERE GOES THE CONTENT
+        out.println("</div></div></div>");
+      }
+      out.println("<br><br>");
+  }
 %>
 
-<div id="myModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Confirmation</h4>
-            </div>
-            <div class="modal-body">
-                <p>Do you want to save changes you made to document before closing?</p>
-                <p class="text-warning"><small>If you don't save, your changes will be lost.</small></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Large modal -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
