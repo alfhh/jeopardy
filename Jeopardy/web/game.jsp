@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Jeopardy</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="js/game.js"></script>
     </head>
@@ -35,10 +35,12 @@
             String dcol1H = "foo";
             ArrayList dcol1= new ArrayList();
             Square s1 = new Square(1, "m1", "n1", 1);
-            Square s2 = new Square(2, "m2", "n2", 1);
-            Square s3 = new Square(3, "m3", "n3", 1);
-            Square s4 = new Square(4, "m4", "n4", 1);
-            Square s5 = new Square(5, "m5", "n5", 1);
+
+            Square s2 = new Square(2, "m2", "n2", 2);
+            Square s3 = new Square(3, "m3", "n3", 3);
+            Square s4 = new Square(4, "m4", "n4", 4);
+            Square s5 = new Square(5, "m5", "n5", 5);
+
             dcol1.add(s1);
             dcol1.add(s2);
             dcol1.add(s3);
@@ -60,6 +62,7 @@
             
         %>
         <div class="container-fluid">
+
            
             <div class="col-md-2">
             <table>
@@ -69,18 +72,6 @@
                         Square s = (Square) dcol1.get(i);
                 %>
                 <tr><td class="square"><%= s.getHint() %></td></tr>
-                <% } %>
-            </table>
-            </div>
-
-            <div class="col-md-2">
-            <table>
-                <tr><th><%= dcol2H %></th></tr>
-                <% 
-                    for (int i = 0; i < dcol2.size(); i++){
-                        Square t = (Square) dcol2.get(i);
-                %>
-                <tr><td class="squadre"><%= t.getHint() %></td></tr>
                 <% } %>
             </table>
             </div>
