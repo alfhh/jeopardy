@@ -18,24 +18,25 @@
             <%
                 for(int i = 0; i < 6; i++) {
                     
-                    out.print("<h2 class='sub-header'>"+ session.getAttribute("catName"+i) +"</h2>");
-                    out.print("<div class='table-responsive'>");      
-                    out.print("<table class='table table-striped'><thead>");
-                    out.print("<tr><th>Question</th><th>Answer</th><th>Points</th><th>Select</th></tr></thead>");
-                    out.print("<tbody>");
+                    out.println("<h2 class='sub-header'>"+ session.getAttribute("catName"+i) +"</h2>");
+                    out.println("<div class='table-responsive'>");      
+                    out.println("<table class='table table-striped'><thead>");
+                    out.println("<tr><th>Question</th><th>Answer</th><th>Points</th><th>Select</th></tr></thead>");
+                    out.println("<tbody>");
                     
                     ArrayList squares = (ArrayList)session.getAttribute("squares"+i);
                     for(int j = 0; j < squares.size(); j++){
                         Square sq = (Square)squares.get(j);
-                        out.print("<tr>");
-                        out.print("<td>"+sq.getQuestion()+"</td>");
-                        out.print("<td>"+sq.getHint()+"</td>");
-                        out.print("<td>"+sq.getScore()+"</td>");
-                        out.print("<td><input type='checkbox' name='categories' value='1'></td>");
-                        out.print("</tr>");
+                        out.println("<tr>");
+                        out.println("<td>"+sq.getQuestion()+"</td>");
+                        out.println("<td>"+sq.getHint()+"</td>");
+                        out.println("<td>"+sq.getScore()+"</td>");
+                        // THE ID OF THE CATEGORY IS PRINTED FIRST, THEN THE ID OF THE SQUARE
+                        out.println("<td><input type='checkbox' name='categories' value='"+session.getAttribute("catID"+i)+"_"+sq.getID()+"'></td>");
+                        out.println("</tr>");
                     }
                     
-                    out.print("</tbody></table>");
+                    out.println("</tbody></table>");
                 }
                     
  
