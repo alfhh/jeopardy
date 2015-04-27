@@ -307,6 +307,36 @@ public class DBHandler {
         }
          return valid;
     }
+     public static boolean deleteCourse (String id) {
+             boolean valid = false;
+        try {
+            Statement statement = connection.createStatement();
+                    //UPDATE registrados SET $nombreColumna= '$valorNuevo' WHERE $nombreColumna = '$valorViejo' AND id = '$id'"
+            String query = "DELETE FROM Classes WHERE Id ="+id+" LIMIT 1";
+            System.out.println(query);
+            statement.executeUpdate(query);
+            statement.close();
+            valid =true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return valid;
+    }
+     public static boolean addCourse () {
+             boolean valid = false;
+        try {
+            Statement statement = connection.createStatement();
+            String query = "INSERT into Classes (name) VALUES ('name')";
+            System.out.println(query);
+            statement.executeUpdate(query);
+            statement.close();
+            valid =true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return valid;
+    }
+     //"INSERT INTO registrados (nombre,apellido,direccion,codigo,ciudad,hijos,email) VALUES('nombre','apellido','direccion','codigo','ciudad','hijos','email')"
     /*
     public static void storeMessage(Mensaje mensaje) {
         try {

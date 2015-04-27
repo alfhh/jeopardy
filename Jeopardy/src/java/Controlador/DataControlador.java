@@ -80,7 +80,7 @@ public class DataControlador extends HttpServlet {
         }
         if(data.equals("updateCourse")){
             
-            System.out.println("HACERUPDATE");
+           // System.out.println("HACERUPDATE");
             
            String id = request.getParameter("id");
            String columna = request.getParameter("columna");
@@ -88,6 +88,24 @@ public class DataControlador extends HttpServlet {
            String newValor = request.getParameter("valor");
            //String id, String column, String oldvalue, String newValue
            DBHandler.updateCourse(id, columna, valorViejo, newValor);
+           
+        }
+        if(data.equals("deleteCourse")){
+            
+            //System.out.println("delete");
+            
+           String id = request.getParameter("id");
+           //String id, String column, String oldvalue, String newValue
+           DBHandler.deleteCourse(id);
+           
+        }
+        if(data.equals("addCourse")){
+            
+           // System.out.println("add");
+            
+           //String id = request.getParameter("id");
+           //String id, String column, String oldvalue, String newValue
+           DBHandler.addCourse();
            
         }
         

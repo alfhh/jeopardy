@@ -32,9 +32,51 @@ function salvarMod(obj, valor,id1,htmlId, valorviejo)
                         //panel.innerHTML= msg;
                     }
                 });
-                
+}
+function reload1(){
+   // window.alert("reload");
+                    $.ajax({
+                    type: "get",
+                    url: "DataControlador", //this is my servlet
+                    data: "data=getCourse",
+                    success: function(msg){   
+                        var panel = document.getElementById("result1");
+                        panel.innerHTML= msg;
+                    }
+                });
+}
+function borrar(obj)
+{
+   
+    var i1 = "data=deleteCourse&id=";
+    var res = i1.concat(obj);
+    
+    $.ajax({
+                    type: "get",
+                    url: "DataControlador", //this is my servlet
+                    data: res,
+                    success: function(msg){ 
+                        obj.replaceChild(document.createTextNode(valor), obj.firstChild);
+                    }
+                });
+                reload1();
 
 }
+function addRow()
+{
+    
+    $.ajax({
+                    type: "get",
+                    url: "DataControlador", //this is my servlet
+                    data: "data=addCourse",
+                    success: function(msg){ 
+                        obj.replaceChild(document.createTextNode(valor), obj.firstChild);
+                    }
+                });
+                reload1();
+
+}
+
 
 </script>
 
@@ -52,7 +94,7 @@ function salvarMod(obj, valor,id1,htmlId, valorviejo)
 
         <div id="result1"></div>
 
-    <center><button onclick="agregarRenglon()">Add Row</button></center>    
+    <center><button onclick="addRow()">Add Row</button></center>    
     
     </div> <!-- /container -->
 
