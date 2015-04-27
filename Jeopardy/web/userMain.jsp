@@ -6,6 +6,15 @@
 <%@include file="/header.jsp" %>
 
     <div class="container">
+                                <%
+                //If bad input the message gets displayed.
+        String message = (String) request.getAttribute("message");
+        if(message != null){
+            
+                %>  <p style="color:green"><%= message%></p>
+                <%
+        }
+    %>
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">

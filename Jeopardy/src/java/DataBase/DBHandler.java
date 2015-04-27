@@ -253,6 +253,20 @@ public class DBHandler {
         }
         return list;
      }
+     public static boolean insertStudent (String name, String last, String number) {
+             boolean valid = false;
+        try {
+            Statement statement = connection.createStatement();
+                    
+            String query = "insert into Students (fname, lname, number) values ('" + name + "','" + last + "','" + number + "')";
+            statement.executeUpdate(query);
+            statement.close();
+            valid =true;
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return valid;
+    }
     /*
     public static void storeMessage(Mensaje mensaje) {
         try {
