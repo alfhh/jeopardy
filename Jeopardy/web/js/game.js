@@ -6,6 +6,7 @@
 
 // as soon as the document is loaded
 $( document ).ready(function() {
+    alert('hello');
   $('.square').click(function() {
             // removes the text of the content
             $(this).toggleClass("show");
