@@ -116,7 +116,7 @@ public class GameController extends HttpServlet {
          */
         else if(task.equals("choose")){
             String type = (String)request.getAttribute("type");
-            int teamAmounts = Integer.parseInt(request.getParameter("quantity"));
+            int teamAmounts = 1;
             ArrayList students = DBGame.getStudents(); // Load the students
             int size = DBGame.getNumStudents(); // Get the size
             request.setAttribute("students", students);
@@ -124,6 +124,7 @@ public class GameController extends HttpServlet {
             if(type == "solo")
                 url = "/chooseSolo.jsp";
             else{
+                teamAmounts = Integer.parseInt(request.getParameter("quantity"));
                 request.setAttribute("quantity", teamAmounts);
                 url = "/chooseTeam.jsp";
             }

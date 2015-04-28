@@ -16,7 +16,7 @@
                         int quantity = (Integer) request.getAttribute("quantity");
                         for (int j = 0; j < quantity; j++){
                     %>
-                    <th><%= j %></th>
+                    <th id="header<%=j%>"><%= j+1 %></th>
                     <%
                         }
                     %>
@@ -31,7 +31,7 @@
                     <% 
                         for (int j = 0; j < quantity; j++){
                     %>
-                    <td><input type="checkbox" name="<%= s.getIdS() %>" value="<%= s.getIdS() %>"></td>
+                    <td><input class="<%= s.getIdS() %>" id="<%= j %>" type="radio" name="<%= s.getIdS() %>" value="<%= s.getIdS() %>"></td>
                     <%
                         }
                     %>
