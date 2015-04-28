@@ -17,7 +17,7 @@
     %>
 
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
+      <div class="jumbotron text-center">
         <h1>New GAME</h1>
         <p>Press the button to play a new game</p>
         <p></p>

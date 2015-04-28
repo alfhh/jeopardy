@@ -25,6 +25,9 @@
                  }
             
             %>
+            
+            <h1 class="text-center">Thanks for playing!</h1>
+            <br>
   
         </table>
     
