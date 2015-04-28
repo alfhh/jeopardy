@@ -9,39 +9,40 @@
 
     <div class="container">
 
-        <form action="GameController?task=toGame" method="post">
-        <table class="table table-bordered table-striped">
-            <tr><th>Student</th>
-                <% 
-                        int quantity = (Integer) request.getAttribute("quantity");
-                        for (int j = 0; j < quantity; j++){
-                    %>
-                    <th id="header<%=j%>"><%= j+1 %></th>
-                    <%
-                        }
-                    %>
-                </tr>
-                <% 
-                    int size = (Integer) request.getAttribute("studentNum");
-                    ArrayList list = (ArrayList) request.getAttribute("students");
-                    for (int i = 0; i < size; i++){
-                        Student s = (Student) list.get(i);
-                %>
-            <tr><td><%= s.getFname() %> <%= s.getLname() %> </td>
-                    <% 
-                        for (int j = 0; j < quantity; j++){
-                    %>
-                    <td><input class="<%= s.getIdS() %>" id="<%= j %>" type="radio" name="<%= s.getIdS() %>" value="<%= s.getIdS() %>"></td>
-                    <%
-                        }
-                    %>
-                </tr>
+        <div class='table-responsive'>
+        <form action="GameController?task=toGameTeam" method="post">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Student</th>
                 <%
-                    }
-                %>
-        </table>
+                int numTeams = (int)session.getAttribute("quantity");
+                for(int i = 0; i < numTeams; i++){
+                    out.println("<th>"+(i+1)+"</th>"); // Prints the team's name in the header
+                }
+                out.println("</tr></thead>");
+                out.println("<thbody>");
+                
+                int numStudents = (int)session.getAttribute("studentNum");
+                for(int i = 0; i < numStudents; i++) {
+                    
+                    ArrayList students = (ArrayList)session.getAttribute("students");
+                    Student st = (Student) students.get(i);
+                    out.print("<tr><td>"+st.getFname()+ " " +st.getLname()+"</td>");
+                    
+                    for(int j = 0; j < numTeams; j++)
+                        out.println("<td><input type='radio' name='"+st.getIdS()+"' value='"+j+"'></td>");
+                    
+                    out.print("</tr>");
+                    
+                }
+                    out.println("</tbody></table>");
+ 
+            %>
+            </table>
          <input type="submit" value="Submit" class="btn btn-default">
         </form>
+        </div>
         
     </div> <!-- /container -->
 

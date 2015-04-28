@@ -95,6 +95,34 @@ public class GameController extends HttpServlet {
             url = "/gameTest.jsp";
         }
         
+        
+        /**
+         * This task receives an array of the checked students to start the
+         * game.
+         * SAME AS THE PAST ONE BUT FOR TEAMS
+         * !! THIS MUST BE IMPLEMENTED
+         */
+        else if(task.equals("toGameTeam")){
+            System.out.println("TEAMS!!");
+            ArrayList teams = new ArrayList();
+            ArrayList students = DBGame.getStudents(); // Load the students
+            int size = DBGame.getNumStudents(); // Get the size
+            for(int i = 0; i < size; i++){
+                Student s = (Student)students.get(i);
+                if(request.getParameter("" + s.getIdS())!=null){
+                    System.out.println(s.getFname());
+                    Team tm = new Team(s.getFname(), 0, 0, s.getIdS());
+                    teams.add(tm);
+                }
+            }
+            session.setAttribute("turn", 0);
+            session.setAttribute("squaresLeft", 30);
+           // session.setAttribute("gameover", "false");
+            session.setAttribute("Team", teams);
+            url = "/gameTest.jsp";
+        }
+        
+        
         /**
          * This task receives an array of six values of categories,
          * from which it uploads them to session.
@@ -116,25 +144,34 @@ public class GameController extends HttpServlet {
         
         /**
          * This task sends you to the player select screen.
+         * The value of type depends on the radio button that you
+         * choose: Solo or Team
          */
         else if(task.equals("choose")){
-            String type = (String)request.getAttribute("type");
+            
+            String type = request.getParameter("type");
             int teamAmounts = 1;
             ArrayList students = DBGame.getStudents(); // Load the students
             int size = DBGame.getNumStudents(); // Get the size
-            request.setAttribute("students", students);
-            request.setAttribute("studentNum", size);
-            if(type == "solo")
+            session.setAttribute("students", students);
+            session.setAttribute("studentNum", size);
+            
+            if(type.equals("solo"))
                 url = "/chooseSolo.jsp";
+            
             else{
                 teamAmounts = Integer.parseInt(request.getParameter("quantity"));
-                request.setAttribute("quantity", teamAmounts);
-                url = "/chooseTeam.jsp";
+                session.setAttribute("quantity", teamAmounts);
+                url = "/createTeam.jsp";
             }
         }
         
         
         
+        /**
+         * This function loads the selected questions into six different
+         * arrays that will be loaded on the game
+         */
         else if(task.equals("go")){
             for(int i = 0; i < 6; i++)
                 session.removeAttribute("squares"+ i);

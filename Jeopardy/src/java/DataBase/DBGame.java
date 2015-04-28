@@ -211,7 +211,8 @@ public class DBGame {
             Logger.getLogger(DBGame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return result;    }
+        return result;
+    }
     
     /**
      * Gets number of students.
@@ -225,7 +226,7 @@ public class DBGame {
             ResultSet results = statement.executeQuery("select count(fname) from Students");
 
             if (results.next()) { // Just one row received
-                size = results.getInt(1);
+                size = Integer.parseInt(results.getString(1));
             }
             
             statement.close();
