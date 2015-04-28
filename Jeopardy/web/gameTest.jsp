@@ -171,6 +171,7 @@
 
                             }
                         });
+             reload1();           
             $('#'+id).attr("disabled", true);
            reload1();
             
@@ -186,6 +187,8 @@
                              
                             }
                         });
+                        
+            reload1();
             $('#'+id).attr("disabled", true);
            reload1();
            

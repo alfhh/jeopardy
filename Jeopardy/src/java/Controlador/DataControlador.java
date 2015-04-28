@@ -326,18 +326,6 @@ public class DataControlador extends HttpServlet {
                 turn++;
                 if(turn==teams.size())
                     turn = 0;
-                /*
-                int squaresLeft = (Integer) session.getAttribute("squaresLeft");
-                squaresLeft--;
-                
-                if(squaresLeft ==0){
-                   send =true;
-                   url ="/gameOver.jsp";
-                    System.out.println("Gameover");
-
-                }
-                session.setAttribute("squaresLeft", squaresLeft);
-                */
                     
                     
                 
@@ -349,9 +337,7 @@ public class DataControlador extends HttpServlet {
         if(data.equals("incorrect")){
                         
             ArrayList teams = (ArrayList) session.getAttribute("Team");
-            //ArrayList teams2 = new ArrayList();
-            //int score = Integer.parseInt(request.getParameter("points"));
-            
+
             int turn = (Integer) session.getAttribute("turn");
             
 
@@ -360,26 +346,15 @@ public class DataControlador extends HttpServlet {
                     turn = 0;
                 session.setAttribute("turn", turn);
                 
-                /*
-                int squaresLeft = (Integer) session.getAttribute("squaresLeft");
-                squaresLeft--;
-                
-                if(squaresLeft == 0){
-                    send = true;
-                    url ="/gameOver.jsp";
-                    System.out.println("Gameover");
-                }
-                session.setAttribute("squaresLeft", squaresLeft);
-                
-                  */
-                //System.out.println("puntos sumados");
-                //session.removeAttribute("Team");
-               // session.setAttribute("Team", teams2);
+  
         }
         if(data.equals("gameover")){
                         
             send = true;
             url ="/gameOver.jsp";
+            
+            //guardarBaseDeDatos
+            
             
         }
         

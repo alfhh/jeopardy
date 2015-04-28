@@ -4,14 +4,29 @@
     Author     : enriqueohernandez
 --%>
 
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.Collections"%>
+<%@page import="User.Team"%>
+<%@page import="java.util.ArrayList"%>
 <%@include file="/header.jsp" %>
 
     <div class="container">
+        <table class="table table-hover">
+            <tr><th>Team</th><th>Points</th></tr>
+        
         <%
-            
+             ArrayList teams = (ArrayList) session.getAttribute("Team");
+             
+                      
+                for(int i = 0; i<teams.size();i++){
+                    Team tm =(Team)teams.get(i);
+                   out.println("<tr><td>"+tm.getName()+"</td><td>"+tm.getPuntaje()+"</td></tr>");
+                    
+                 }
             
             %>
-
+  
+        </table>
     
 
     </div> <!-- /container -->
