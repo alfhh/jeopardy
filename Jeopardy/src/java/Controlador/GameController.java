@@ -88,6 +88,9 @@ public class GameController extends HttpServlet {
                     teams.add(tm);
                 }
             }
+            session.setAttribute("turn", 0);
+            session.setAttribute("squaresLeft", 30);
+           // session.setAttribute("gameover", "false");
             session.setAttribute("Team", teams);
             url = "/gameTest.jsp";
         }
