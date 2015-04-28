@@ -18,9 +18,9 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        <h1>New GAME</h1>
+        <p>Press the button to play a new game</p>
+        <p></p>
         <p>
           <a class="btn btn-lg btn-primary" href="GameController?task=new" role="button">Game +</a>
         </p>

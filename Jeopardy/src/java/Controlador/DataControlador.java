@@ -12,6 +12,7 @@ import Game.Course;
 import Game.Square;
 import User.Professor;
 import User.Student;
+import User.Team;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -282,6 +283,104 @@ public class DataControlador extends HttpServlet {
            //String id, String column, String oldvalue, String newValue
            DBHandler.addSquare(idCategory);
            
+        }
+        if(data.equals("loadGame")){
+            
+            all+=" <table class=\"table\">  <tr> <th>Team</th><th>Points</th> </tr> ";
+            
+            ArrayList teams = (ArrayList) session.getAttribute("Team");
+            int turn = (Integer) session.getAttribute("turn");
+            
+            
+                for(int i = 0; i<teams.size();i++){
+                    //Square sq = (Square)temp.get(i);
+                    Team tm =(Team)teams.get(i);
+                    if(turn==i)
+                       all+= "<tr class='success' ><td>"+tm.getName()+"</td><td>"+tm.getPuntaje()+"</td></tr>";
+                    else
+                        all+="<tr><td>"+tm.getName()+"</td><td>"+tm.getPuntaje()+"</td></tr>";
+                }
+            
+           all+="</table>";
+           
+   
+        }
+        if(data.equals("correct")){
+                        
+            ArrayList teams = (ArrayList) session.getAttribute("Team");
+            ArrayList teams2 = new ArrayList();
+            int score = Integer.parseInt(request.getParameter("points"));
+            
+            int turn = (Integer) session.getAttribute("turn");
+            
+            
+                for(int i = 0; i<teams.size();i++){
+                    Team tm =(Team)teams.get(i);
+                    if(turn == i){
+                        System.out.println(score);
+                        tm.setPuntaje(tm.getPuntaje()+score);
+                    }
+                    teams2.add(tm);
+                    
+                 }
+                turn++;
+                if(turn==teams.size())
+                    turn = 0;
+                /*
+                int squaresLeft = (Integer) session.getAttribute("squaresLeft");
+                squaresLeft--;
+                
+                if(squaresLeft ==0){
+                   send =true;
+                   url ="/gameOver.jsp";
+                    System.out.println("Gameover");
+
+                }
+                session.setAttribute("squaresLeft", squaresLeft);
+                */
+                    
+                    
+                
+                session.setAttribute("turn", turn);
+               // System.out.println("puntos sumados");
+                session.removeAttribute("Team");
+                session.setAttribute("Team", teams2);
+        }
+        if(data.equals("incorrect")){
+                        
+            ArrayList teams = (ArrayList) session.getAttribute("Team");
+            //ArrayList teams2 = new ArrayList();
+            //int score = Integer.parseInt(request.getParameter("points"));
+            
+            int turn = (Integer) session.getAttribute("turn");
+            
+
+                turn++;
+                if(turn==teams.size())
+                    turn = 0;
+                session.setAttribute("turn", turn);
+                
+                /*
+                int squaresLeft = (Integer) session.getAttribute("squaresLeft");
+                squaresLeft--;
+                
+                if(squaresLeft == 0){
+                    send = true;
+                    url ="/gameOver.jsp";
+                    System.out.println("Gameover");
+                }
+                session.setAttribute("squaresLeft", squaresLeft);
+                
+                  */
+                //System.out.println("puntos sumados");
+                //session.removeAttribute("Team");
+               // session.setAttribute("Team", teams2);
+        }
+        if(data.equals("gameover")){
+                        
+            send = true;
+            url ="/gameOver.jsp";
+            
         }
         
         /*

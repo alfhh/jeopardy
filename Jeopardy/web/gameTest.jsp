@@ -68,9 +68,9 @@
         if(j==0)
             out.println("<tr>");
         if(sq.getScore()>=1000)
-             out.println("<td><button type='button' class='btn btn-primary btn-xl' data-toggle='modal' data-target='."+sq.getID()+"'>"+sq.getScore()+"</button></td>");
+             out.println("<td><button type='button' id='"+sq.getID()+"' class='btn btn-primary btn-xl' data-toggle='modal' data-target='."+sq.getID()+"'>"+sq.getScore()+"</button></td>");
         else
-             out.println("<td><button type='button' class='btn btn-primary btn-xl' data-toggle='modal' data-target='."+sq.getID()+"'>&nbsp;"+sq.getScore()+"</button></td>");
+             out.println("<td><button type='button'id='"+sq.getID()+"' class='btn btn-primary btn-xl' data-toggle='modal' data-target='."+sq.getID()+"'>&nbsp;"+sq.getScore()+"</button></td>");
 
         if(j==5)
             out.println("</tr>");
@@ -96,8 +96,8 @@
             out.println("</div></div>");
             
             out.println("<div class='modal-footer'>");
-            out.println("<button type='button' class='btn btn-default' data-dismiss='modal'  onclick=incorrect('"+sq.getID()+"') >Wrong</button>");
-            out.println("<button type='button' class='btn btn-primary' onclick=correct('"+sq.getID()+"') >Correct!</button>");
+            out.println("<button type='button' class='btn btn-default' data-dismiss='modal'  onclick=incorrect('"+sq.getID()+"','"+sq.getScore()+"') >Wrong</button>");
+            out.println("<button type='button' class='btn btn-primary' data-dismiss='modal'  onclick=correct('"+sq.getID()+"','"+sq.getScore()+"') >Correct!</button>");
             out.println("</div>");
         
         out.println("</div></div></div>");
@@ -109,31 +109,15 @@
        
         </div>
         <div class="col-md-2">
-            
-        <table class="table table-striped">
-         <tr>
-             <th>Team</th><th>Points</th>
-         </tr>
-         <%
-            ArrayList teams = (ArrayList) session.getAttribute("Team");
-            
-                for(int i = 0; i<teams.size();i++){
-                    //Square sq = (Square)temp.get(i);
-                    Team tm =(Team)teams.get(i);
-                    if(i==0)
-                        out.println("<tr class='success' ><td>"+tm.getName()+"</td><td>0</td></tr>");
-                    else
-                        out.println("<tr><td>"+tm.getName()+"</td><td>0</td></tr>");
-                }
-            
-           %>
-           
-        </table>
-            
+            <div id="result1"></div>
         </div>
       </div>
 
+        
     </div>
+        <br><br><br><br><br><br>
+
+            <center><a href="DataControlador?data=gameover" ><button type="button" class="btn btn-primary btn-lg btn-block">END GAME!</button></a></center>
 </div>
           
 
@@ -144,11 +128,68 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script>
-        function correct(id){
-            window.alert(id);
+         $(document).ready(function() {
+
+                $.ajax({
+                    type: "get",
+                    url: "DataControlador", //this is my servlet
+                    data: "data=loadGame",
+                    success: function(msg){   
+                        var panel = document.getElementById("result1");
+                        panel.innerHTML= msg;
+                    }
+                });
+        });
+        function reload1(){
+           // window.alert("Reload");
+            $.ajax({
+                    type: "get",
+                    url: "DataControlador", //this is my servlet
+                    data: "data=loadGame",
+                    success: function(msg){   
+                        var panel = document.getElementById("result1");
+                        panel.innerHTML= msg;
+                    }
+                });
         }
-        function incorrect(id){
-            window.alert(id);
+        function correct(id,score){
+  
+        //window.alert(score);
+            $("#"+id).html("XXX");
+            //document.getElementById("'"+id+"'").innerHTML("x");
+            
+            var i1 = "data=correct&id=";
+            var i2 = "&points=";
+            var res = i1.concat(id,i2,score);
+            $.ajax({
+                            type: "get",
+                            url: "DataControlador", //this is my servlet
+                            data: res,
+                            success: function(msg){ 
+                                 //window.alert("salvar");
+                                
+
+                            }
+                        });
+            $('#'+id).attr("disabled", true);
+           reload1();
+            
+        }
+        function incorrect(id,score){
+            
+             $("#"+id).html("XXX");
+              $.ajax({
+                            type: "get",
+                            url: "DataControlador", //this is my servlet
+                            data: "data=incorrect",
+                            success: function(msg){ 
+                             
+                            }
+                        });
+            $('#'+id).attr("disabled", true);
+           reload1();
+           
+            
         }
         
     </script>
