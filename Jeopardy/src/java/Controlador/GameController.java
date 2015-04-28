@@ -76,12 +76,14 @@ public class GameController extends HttpServlet {
          * game.
          */
         else if(task.equals("toGame")){
+            System.out.println("ToGame");
             ArrayList teams = new ArrayList();
             ArrayList students = DBGame.getStudents(); // Load the students
             int size = DBGame.getNumStudents(); // Get the size
             for(int i = 0; i < size; i++){
                 Student s = (Student)students.get(i);
                 if(request.getParameter("" + s.getIdS())!=null){
+                    System.out.println(s.getFname());
                     Team tm = new Team(s.getFname(), 0, 0, s.getIdS());
                     teams.add(tm);
                 }

@@ -96,8 +96,8 @@
             out.println("</div></div>");
             
             out.println("<div class='modal-footer'>");
-            out.println("<button type='button' class='btn btn-default' data-dismiss='modal'>Wrong</button>");
-            out.println("<button type='button' class='btn btn-primary'>Correct!</button>");
+            out.println("<button type='button' class='btn btn-default' data-dismiss='modal'  onclick=incorrect('"+sq.getID()+"') >Wrong</button>");
+            out.println("<button type='button' class='btn btn-primary' onclick=correct('"+sq.getID()+"') >Correct!</button>");
             out.println("</div>");
         
         out.println("</div></div></div>");
@@ -112,20 +112,20 @@
             
         <table class="table table-striped">
          <tr>
-             <th>Team/Student</th>
+             <th>Team</th><th>Points</th>
          </tr>
          <%
             ArrayList teams = (ArrayList) session.getAttribute("Team");
-            if(teams!= null){
+            
                 for(int i = 0; i<teams.size();i++){
                     //Square sq = (Square)temp.get(i);
                     Team tm =(Team)teams.get(i);
                     if(i==0)
-                        out.println("<tr class='success' ><td>"+tm.getName()+"</td></tr>");
+                        out.println("<tr class='success' ><td>"+tm.getName()+"</td><td>0</td></tr>");
                     else
-                        out.println("<tr><td>"+tm.getName()+"</td></tr>");
+                        out.println("<tr><td>"+tm.getName()+"</td><td>0</td></tr>");
                 }
-            }
+            
            %>
            
         </table>
@@ -143,5 +143,14 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script>
+        function correct(id){
+            window.alert(id);
+        }
+        function incorrect(id){
+            window.alert(id);
+        }
+        
+    </script>
   </body>
 </html>

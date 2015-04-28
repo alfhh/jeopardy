@@ -18,7 +18,7 @@
                     for (int i = 0; i < size; i++){
                         Student s = (Student) list.get(i);
                 %>
-            <tr><td><%= s.getFname() %> <%= s.getLname() %> </td><td><input type="checkbox" name="plays" value="<%= s.getIdS() %>"></td></tr>
+            <tr><td><%= s.getFname() %> <%= s.getLname() %> </td><td><input type="checkbox" name="<%= s.getIdS() %>" value="<%= s.getIdS() %>"></td></tr>
                 <%
                     }
                 %>
