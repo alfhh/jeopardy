@@ -5,6 +5,7 @@
 --%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="User.Student"%>
+<%@page import="User.Team"%>
 <%@include file="/header.jsp" %>
 
     <div class="container">
@@ -16,9 +17,11 @@
                     <tr>
                         <th>Student</th>
                 <%
+                ArrayList equipos = (ArrayList)session.getAttribute("Equipos");
                 int numTeams = (int)session.getAttribute("quantity");
                 for(int i = 0; i < numTeams; i++){
-                    out.println("<th>"+(i+1)+"</th>"); // Prints the team's name in the header
+                    Team eq = (Team)equipos.get(i);
+                    out.println("<th>"+eq.getName()+"</th>"); // Prints the team's name in the header
                 }
                 out.println("</tr></thead>");
                 out.println("<thbody>");

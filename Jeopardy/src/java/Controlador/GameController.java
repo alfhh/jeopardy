@@ -104,20 +104,9 @@ public class GameController extends HttpServlet {
          */
         else if(task.equals("toGameTeam")){
             System.out.println("TEAMS!!");
-            ArrayList teams = new ArrayList();
-            ArrayList students = DBGame.getStudents(); // Load the students
-            int size = DBGame.getNumStudents(); // Get the size
-            for(int i = 0; i < size; i++){
-                Student s = (Student)students.get(i);
-                if(request.getParameter("" + s.getIdS())!=null){
-                    System.out.println(s.getFname());
-                    Team tm = new Team(s.getFname(), 0, 0, s.getIdS());
-                    teams.add(tm);
-                }
-            }
+            ArrayList teams = (ArrayList)session.getAttribute("Equipos");
             session.setAttribute("turn", 0);
             session.setAttribute("squaresLeft", 30);
-           // session.setAttribute("gameover", "false");
             session.setAttribute("Team", teams);
             url = "/gameTest.jsp";
         }
@@ -172,10 +161,13 @@ public class GameController extends HttpServlet {
          * the id from the professor
          */
         else if(task.equals("saveTeam")){
+            ArrayList equipos = new ArrayList();
             for(int i = 0; i < (int)session.getAttribute("quantity"); i++){
-                DBGame.createTeam(request.getParameter("Team"+i), (int)session.getAttribute("idProf"));
+                DBGame.createTeam(request.getParameter("Team"+i), (int)session.getAttribute("idProf"), equipos);
             }
-            
+           
+            session.setAttribute("Equipos", equipos);
+            url = "/chooseTeam.jsp";
             
         }
         

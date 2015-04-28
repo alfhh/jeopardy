@@ -5,6 +5,7 @@
  */
 package DataBase;
 
+import User.Team;
 import Game.Course;
 import Game.Category;
 import Game.Square;
@@ -68,21 +69,22 @@ public class DBGame {
         return result;
     }
     
-    public static boolean createTeam(String name, int idProf) {
-        System.out.println("THE VAR NAME IS: " + name);
-        System.out.println("THE VAR ID IS: " + idProf);
-        
+    public static ArrayList createTeam(String name, int idProf, ArrayList equipos) {        
         try {
             Statement statement = connection.createStatement();
                     
             String query = "insert into Groups VALUES (DEFAULT, '"+name+"',"+idProf+")";
             statement.executeUpdate(query);
             statement.close();
+            
+            Team e = new Team(name, 0, 0, DBGame.getLastTeam());
+            equipos.add(e);
+            
         } catch (SQLException ex) {
             Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return true;
+        return equipos;
     }
     
     
@@ -163,6 +165,31 @@ public class DBGame {
         try {
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery("select count(name) from Classes");
+
+            if (results.next()) { // Just one row received
+                size = results.getInt(1);
+            }
+            
+            statement.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return size;
+    }
+    
+    
+    /**
+     * Returns the id of the last Team
+     */
+    public static int getLastTeam(){
+        // Variable used to store the number of elements in classes
+        int size = 0;
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("select MAX(Id) from Groups");
 
             if (results.next()) { // Just one row received
                 size = results.getInt(1);

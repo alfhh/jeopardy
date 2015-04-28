@@ -30,7 +30,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Fixed Top Navbar Example for Bootstrap</title>
+    <title>JeoGen - Jeopardy</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -54,7 +54,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Welcome <jsp:getProperty name="professor" property="fname"/> <jsp:getProperty name="professor" property="lname"/></a>
+          <a class="navbar-brand" href="userMain.jsp">Welcome <jsp:getProperty name="professor" property="fname"/> <jsp:getProperty name="professor" property="lname"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">

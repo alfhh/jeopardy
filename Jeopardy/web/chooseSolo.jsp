@@ -13,8 +13,8 @@
         <table class="table table-bordered table-striped">
             <tr><th>Student</th><th>Plays?</th></tr>
                 <% 
-                    int size = (Integer) request.getAttribute("studentNum");
-                    ArrayList list = (ArrayList) request.getAttribute("students");
+                    int size = (Integer) session.getAttribute("studentNum");
+                    ArrayList list = (ArrayList) session.getAttribute("students");
                     for (int i = 0; i < size; i++){
                         Student s = (Student) list.get(i);
                 %>
