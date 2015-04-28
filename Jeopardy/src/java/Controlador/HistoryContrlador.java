@@ -45,14 +45,17 @@ public class HistoryContrlador extends HttpServlet {
         if(history.equals("getAllProfessor")){
             Professor prof = ((Professor)session.getAttribute("professor"));
             
-            ArrayList lista = DBHandler.getAllHistory(prof);
+            //ArrayList lista = DBHandler.getAllHistory(prof);
+            ArrayList listaEquipos = DBHandler.getHTeams((int)session.getAttribute("idProf"));
+            ArrayList listaSolo = DBHandler.getHStudents((int)session.getAttribute("idProf"));
             
-            if(lista.isEmpty()){
+            if(listaEquipos.isEmpty() && listaSolo.isEmpty()){
                 url="/noHistory.jsp";
             }
             else{
-                url="/history.jsp";
-                request.setAttribute("lista", lista);
+                url="/showBlobs.jsp";
+                session.setAttribute("lEquipos", listaEquipos);
+                session.setAttribute("lSolos", listaSolo);
             }
             
         }

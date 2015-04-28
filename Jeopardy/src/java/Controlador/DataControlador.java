@@ -352,10 +352,15 @@ public class DataControlador extends HttpServlet {
                         
             send = true;
             url ="/gameOver.jsp";
+            ArrayList teams = (ArrayList) session.getAttribute("Team");
+            int tipo = (int) session.getAttribute("1p");
             
-            //guardarBaseDeDatos
-            
-            
+            for(int i = 0; i < teams.size(); i++){
+                Team tm =(Team)teams.get(i);
+                DBHandler.addTeamHistory((int)session.getAttribute("idProf"), (int)session.getAttribute("1p"), tm.getId(), tm.getPuntaje());
+            }
+             
+            System.out.println("DONE");
         }
         
         /*

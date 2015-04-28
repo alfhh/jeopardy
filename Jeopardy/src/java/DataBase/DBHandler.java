@@ -7,12 +7,17 @@ package DataBase;
 
 import User.Professor;
 import User.Student;
+import User.Team;
+import Game.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -480,6 +485,115 @@ public class DBHandler {
          return valid;
     }
      //updateSquare
+       
+       
+       public static void addTeamHistory (int fkProf, int type, int fkG, int score) {
+           
+           DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	   Date date = new Date();
+           
+        try {
+            Statement statement = connection.createStatement();
+            String query = "INSERT into Histories (playedDate, fk_prof, fk_group, type, points) VALUES ('"+dateFormat.format(date)+"',"+fkProf+", "+fkG+", "+type+", "+score+")";
+            System.out.println(query);
+            statement.executeUpdate(query);
+            statement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+       
+       
+    public static ArrayList getHTeams (int idProf) {
+        ArrayList resultado = new ArrayList();
+        try {
+            Statement statement = connection.createStatement();
+
+            String query = "select * from Histories where fk_prof= "+idProf+" and type = 0";
+            ResultSet results = statement.executeQuery(query);
+            while (results.next()) {
+               int id = Integer.parseInt(results.getString(1));
+               String date = results.getString(2);
+               int group = Integer.parseInt(results.getString(4));
+               int type = Integer.parseInt(results.getString(5));
+               int points = Integer.parseInt(results.getString(6));
+               Blob b = new Blob(id, date, idProf, group, type, points);
+               resultado.add(b);
+            }
+            statement.close();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return resultado;
+    }
+    
+        public static ArrayList getHStudents (int idProf) {
+        ArrayList resultado = new ArrayList();
+        try {
+            Statement statement = connection.createStatement();
+
+            String query = "select * from Histories where fk_prof= "+idProf+" and type = 1";
+            ResultSet results = statement.executeQuery(query);
+            while (results.next()) {
+               int id = Integer.parseInt(results.getString(1));
+               String date = results.getString(2);
+               int group = Integer.parseInt(results.getString(4));
+               int type = Integer.parseInt(results.getString(5));
+               int points = Integer.parseInt(results.getString(6));
+               System.out.println("Guardado " + id);
+               Blob b = new Blob(id, date, idProf, group, type, points);
+               resultado.add(b);
+            }
+            statement.close();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return resultado;
+    }
+        
+        public static String getSNamse (int id) {
+        String c = "";
+            try {
+            Statement statement = connection.createStatement();
+
+            String query = "select fname, lname from Students where Id= "+id+"";
+            ResultSet results = statement.executeQuery(query);
+            if (results.next()) {
+               String a = results.getString(1);
+               String b = results.getString(2);
+                c = a + " " + b;
+            }
+            statement.close();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return c;
+    }
+        
+            public static String getTNamse (int id) {
+        String c = "";
+            try {
+            Statement statement = connection.createStatement();
+
+            String query = "select name from Groups where Id= "+id+"";
+            ResultSet results = statement.executeQuery(query);
+            if (results.next()) {
+               c = results.getString(1);
+            }
+            statement.close();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return c;
+    }
      
   
 

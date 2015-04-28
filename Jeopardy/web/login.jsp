@@ -19,7 +19,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Login</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -70,11 +70,6 @@
     %>
         
         
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
 
         <button class="btn btn-lg btn-primary btn-block" value="Ldgin" type="submit">Sign in</button>
       </form>
