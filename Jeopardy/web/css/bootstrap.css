@@ -10,6 +10,9 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+.borderless td, .borderless th {
+    border: none;
+}
 div#main-game{
     header-align: center;
     text-align: center;

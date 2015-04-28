@@ -4,6 +4,7 @@
     Author     : ahinojosa
 --%>
 
+<%@page import="User.Team"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Game.Square" %>
 <%@page import="Game.Category" %>
@@ -32,7 +33,21 @@
 </script>
 <div class="container">  
     <div class="jumbotron">
-
+        <div class="row">
+  <div class="col-md-10">
+      <table class='table borderless'>
+         <tr>
+             <th><%=session.getAttribute("catName0").toString()%></th>
+             <th><%=session.getAttribute("catName1").toString()%></th>
+             <th><%=session.getAttribute("catName2").toString()%></th>
+             <th><%=session.getAttribute("catName3").toString()%></th>
+             <th><%=session.getAttribute("catName4").toString()%></th>
+             <th><%=session.getAttribute("catName5").toString()%></th>
+             
+         </tr>
+      
+          
+ 
 <%
     // Gets all the values from the session to load it to an Array
     ArrayList columns = new ArrayList();
@@ -50,7 +65,16 @@
         ArrayList temp = (ArrayList)columns.get(j);
         Square sq = (Square)temp.get(i); // Creates a new instance of the Square object, the index of the array depends of the first loop, to start on 0
         
-        out.println("<button type='button' class='btn btn-primary btn-xl' data-toggle='modal' data-target='."+sq.getID()+"'>"+sq.getScore()+"</button>");
+        if(j==0)
+            out.println("<tr>");
+        if(sq.getScore()>=1000)
+             out.println("<td><button type='button' class='btn btn-primary btn-xl' data-toggle='modal' data-target='."+sq.getID()+"'>"+sq.getScore()+"</button></td>");
+        else
+             out.println("<td><button type='button' class='btn btn-primary btn-xl' data-toggle='modal' data-target='."+sq.getID()+"'>&nbsp;"+sq.getScore()+"</button></td>");
+
+        if(j==5)
+            out.println("</tr>");
+        
         out.println("<div class='modal fade "+sq.getID()+"' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true'>");
         out.println("<div class='modal-dialog modal-lg'><div class='modal-content'>");
         
@@ -78,9 +102,36 @@
         
         out.println("</div></div></div>");
       }
-      out.println("<br><br>");
+     // out.println("<br><br>");
   }
 %>
+        </table>
+       
+        </div>
+        <div class="col-md-2">
+            
+        <table class="table table-striped">
+         <tr>
+             <th>Team/Student</th>
+         </tr>
+         <%
+            ArrayList teams = (ArrayList) session.getAttribute("Team");
+            if(teams!= null){
+                for(int i = 0; i<teams.size();i++){
+                    //Square sq = (Square)temp.get(i);
+                    Team tm =(Team)teams.get(i);
+                    if(i==0)
+                        out.println("<tr class='success' ><td>"+tm.getName()+"</td></tr>");
+                    else
+                        out.println("<tr><td>"+tm.getName()+"</td></tr>");
+                }
+            }
+           %>
+           
+        </table>
+            
+        </div>
+      </div>
 
     </div>
 </div>
