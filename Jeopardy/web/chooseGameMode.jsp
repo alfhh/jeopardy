@@ -7,8 +7,20 @@
 
     <div class="container">
         
-      <a class="btn btn-lg btn-primary" href="GameController?task=choose" role="button">Solo</a>
-      <a class="btn btn-lg btn-primary" href="GameController?task=choose" role="button">Team</a>
+      <form action="GameController?task=choose" method="post">
+      
+          <input type="radio" name="type" value="solo" onclick="
+              document.getElementById('teamNumber').disabled = true;
+                        " checked>Solo
+          
+          <input type="radio" name="type" value="team" onclick="
+              document.getElementById('teamNumber').disabled = false;
+                        ">Team
+          
+          <input type="number" name="quantity" id="teamNumber" disabled value="2">
+          
+          <input type="submit" value="Submit" />
+      </form>
 
     </div> <!-- /container -->
 

@@ -115,11 +115,18 @@ public class GameController extends HttpServlet {
          * This task sends you to the player select screen.
          */
         else if(task.equals("choose")){
+            String type = (String)request.getAttribute("type");
+            int teamAmounts = Integer.parseInt(request.getParameter("quantity"));
             ArrayList students = DBGame.getStudents(); // Load the students
             int size = DBGame.getNumStudents(); // Get the size
             request.setAttribute("students", students);
             request.setAttribute("studentNum", size);
-            url = "/chooseSolo.jsp";
+            if(type == "solo")
+                url = "/chooseSolo.jsp";
+            else{
+                request.setAttribute("quantity", teamAmounts);
+                url = "/chooseTeam.jsp";
+            }
         }
         
         
