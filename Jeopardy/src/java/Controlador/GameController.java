@@ -7,6 +7,8 @@ package Controlador;
 
 import  DataBase.DBGame;
 import User.Professor;
+import User.Student;
+import User.Team;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -70,6 +72,25 @@ public class GameController extends HttpServlet {
         }
         
         /**
+         * This task receives an array of the checked students to start the
+         * game.
+         */
+        else if(task.equals("toGame")){
+            ArrayList teams = new ArrayList();
+            ArrayList students = DBGame.getStudents(); // Load the students
+            int size = DBGame.getNumStudents(); // Get the size
+            for(int i = 0; i < size; i++){
+                Student s = (Student)students.get(i);
+                if(request.getParameter("" + s.getIdS())!=null){
+                    Team tm = new Team(s.getFname(), 0, 0, s.getIdS());
+                    teams.add(tm);
+                }
+            }
+            session.setAttribute("Team", teams);
+            url = "/gameTest.jsp";
+        }
+        
+        /**
          * This task receives an array of six values of categories,
          * from which it uploads them to session.
          */
@@ -87,6 +108,19 @@ public class GameController extends HttpServlet {
             
             url = "/selectSquares.jsp";
         }
+        
+        /**
+         * This task sends you to the player select screen.
+         */
+        else if(task.equals("choose")){
+            ArrayList students = DBGame.getStudents(); // Load the students
+            int size = DBGame.getNumStudents(); // Get the size
+            request.setAttribute("students", students);
+            request.setAttribute("studentNum", size);
+            url = "/chooseSolo.jsp";
+        }
+        
+        
         
         else if(task.equals("go")){
             for(int i = 0; i < 6; i++)
@@ -154,7 +188,7 @@ public class GameController extends HttpServlet {
                 
                 
             
-            url = "/gameTest.jsp";
+            url = "/chooseGameMode.jsp";
         }
         
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);

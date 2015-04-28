@@ -29,6 +29,17 @@ public class Student {
         this.IdS = IdS;
         this.date = date;
     }
+    
+    public Student(int Id, String fname, String lname, int number) {
+        this.IdS = Id;
+        this.fname = fname;
+        this.lname = lname;
+        this.number = number;
+        this.points = 0;
+        this.teamName = "";
+        this.game = 0;
+        this.date = "";
+    }
 
     public Student() {
         this.fname = "";

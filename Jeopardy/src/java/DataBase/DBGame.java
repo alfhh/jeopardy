@@ -9,6 +9,7 @@ import Game.Course;
 import Game.Category;
 import Game.Square;
 import User.Professor;
+import User.Student;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -184,4 +185,54 @@ public class DBGame {
         return result;
     }
     
+    /**
+     * Gets all students from the db.
+     */
+    public static ArrayList getStudents() {
+        ArrayList result = new ArrayList();
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("select * from Students");
+
+            while (results.next()) {
+                int id = Integer.parseInt(results.getString(1));
+                String fName = (results.getString(2));
+                String lName = (results.getString(3));
+                int mat = Integer.parseInt(results.getString(4));
+                
+                Student s = new Student(id, fName, lName, mat);
+                result.add(s);
+            }
+            
+            statement.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return result;    }
+    
+    /**
+     * Gets number of students.
+     */
+    public static int getNumStudents() {
+        // Variable used to store the number of elements in students
+        int size = 0;
+        
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("select count(fname) from Students");
+
+            if (results.next()) { // Just one row received
+                size = results.getInt(1);
+            }
+            
+            statement.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DBGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return size;    }
 }
