@@ -167,6 +167,18 @@ public class GameController extends HttpServlet {
         }
         
         
+        /**
+         * This function saves the teams in the data base creating a relationship with 
+         * the id from the professor
+         */
+        else if(task.equals("saveTeam")){
+            for(int i = 0; i < (int)session.getAttribute("quantity"); i++){
+                DBGame.createTeam(request.getParameter("Team"+i), (int)session.getAttribute("idProf"));
+            }
+            
+            
+        }
+        
         
         /**
          * This function loads the selected questions into six different

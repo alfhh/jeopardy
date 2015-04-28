@@ -58,6 +58,7 @@ public class LoginControlador extends HttpServlet {
                     url = "/userMain.jsp"; 
                     invalidUser = "valid";
                     DBHandler.changeTries(prof, 0);
+                    session.setAttribute("idProf", prof.getId());
                 }
                 //if the user needs to change the password
                 else if(prof.getStatus() == 1){

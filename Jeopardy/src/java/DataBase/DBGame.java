@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+
 /**
  *
  * @author ahinojosa
@@ -65,6 +67,24 @@ public class DBGame {
         
         return result;
     }
+    
+    public static boolean createTeam(String name, int idProf) {
+        System.out.println("THE VAR NAME IS: " + name);
+        System.out.println("THE VAR ID IS: " + idProf);
+        
+        try {
+            Statement statement = connection.createStatement();
+                    
+            String query = "insert into Groups VALUES (DEFAULT, '"+name+"',"+idProf+")";
+            statement.executeUpdate(query);
+            statement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return true;
+    }
+    
     
     /**
      * This function returns an ArrayList with all the questions and answers from

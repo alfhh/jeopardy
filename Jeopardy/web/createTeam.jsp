@@ -14,7 +14,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12 col-md-8 col-md-offset-2 main">
-            <form role="form" action="GameController?task=chooseTeam" method="post">
+            <form role="form" action="GameController?task=saveTeam" method="post">
             <%                    
                 for(int i = 0; i < (int)session.getAttribute("quantity"); i++){
                     out.println("<div class='form-group'>");
