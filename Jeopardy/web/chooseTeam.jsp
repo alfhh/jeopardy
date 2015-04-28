@@ -23,6 +23,7 @@
                     Team eq = (Team)equipos.get(i);
                     out.println("<th>"+eq.getName()+"</th>"); // Prints the team's name in the header
                 }
+                out.println("<th>Plays?</th>");
                 out.println("</tr></thead>");
                 out.println("<thbody>");
                 
@@ -33,10 +34,12 @@
                     Student st = (Student) students.get(i);
                     out.print("<tr><td>"+st.getFname()+ " " +st.getLname()+"</td>");
                     
-                    for(int j = 0; j < numTeams; j++)
-                        out.println("<td><input type='radio' name='"+st.getIdS()+"' value='"+j+"'></td>");
+                    for(int j = 0; j < numTeams; j++){
+                        Team eq = (Team)equipos.get(j);
+                        out.println("<td><input type='radio' name='"+st.getIdS()+"' value='"+eq.getId()+"'></td>");
+                    }
                     
-                    out.print("</tr>");
+                    out.print("<td><input type='checkbox' name='student' value='"+st.getIdS()+"'></td></tr>");
                     
                 }
                     out.println("</tbody></table>");

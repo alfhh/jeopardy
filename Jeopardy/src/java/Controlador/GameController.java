@@ -90,8 +90,8 @@ public class GameController extends HttpServlet {
             }
             session.setAttribute("turn", 0);
             session.setAttribute("squaresLeft", 30);
-           // session.setAttribute("gameover", "false");
             session.setAttribute("Team", teams);
+            session.setAttribute("1p", 1);
             url = "/gameTest.jsp";
         }
         
@@ -104,10 +104,22 @@ public class GameController extends HttpServlet {
          */
         else if(task.equals("toGameTeam")){
             System.out.println("TEAMS!!");
+            
+            String players[] = request.getParameterValues("student");
+            
+            // Here the value is obtained with the value of the checkbox, that
+            // is the name of the radio button, then get the value of the radio
+            // button.
+            for(int i = 0; i < players.length; i++){
+                System.out.println(players[i]+ " juega en "+request.getParameter(players[i]));
+                DBGame.createGroupStudent(Integer.parseInt(players[i]), Integer.parseInt(request.getParameter(players[i])));
+            }
+            
             ArrayList teams = (ArrayList)session.getAttribute("Equipos");
             session.setAttribute("turn", 0);
             session.setAttribute("squaresLeft", 30);
             session.setAttribute("Team", teams);
+            session.setAttribute("1p", 0);
             url = "/gameTest.jsp";
         }
         

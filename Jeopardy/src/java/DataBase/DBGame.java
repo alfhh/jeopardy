@@ -69,6 +69,13 @@ public class DBGame {
         return result;
     }
     
+    /**
+     * Function used to create a group using the id of the professor
+     * @param name
+     * @param idProf
+     * @param equipos
+     * @return 
+     */
     public static ArrayList createTeam(String name, int idProf, ArrayList equipos) {        
         try {
             Statement statement = connection.createStatement();
@@ -85,6 +92,21 @@ public class DBGame {
         }
         
         return equipos;
+    }
+    
+    public static void createGroupStudent(int fkS, int fkG) {        
+        try {
+            Statement statement = connection.createStatement();
+                    
+            String query = "insert into group_student VALUES (DEFAULT, "+fkS+","+fkG+")";
+            statement.executeUpdate(query);
+            statement.close();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DBHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     
